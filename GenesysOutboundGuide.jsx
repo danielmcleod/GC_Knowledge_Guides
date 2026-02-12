@@ -436,6 +436,41 @@ const TROUBLESHOOTING = [
 ];
 
 // ══════════════════════════════════════════════════════════════
+// SEARCH INDEX
+// ══════════════════════════════════════════════════════════════
+const SEARCH_INDEX = (() => {
+  const idx = [];
+  SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
+  USE_CASES.forEach(u => idx.push({ text: `${u.label} ${u.desc}`, label: u.label, sectionId: 't1s1', tier: 0, type: 'Use Case' }));
+  MAP_NODES.forEach(n => idx.push({ text: `${n.label} ${n.sub}`, label: n.label, sectionId: 't1s2', tier: 0, type: 'Component' }));
+  Object.entries(NODE_TOOLTIPS).forEach(([k, v]) => idx.push({ text: `${k} ${v.explanation} ${v.analogy}`, label: k.toUpperCase(), sectionId: 't1s2', tier: 0, type: 'Component' }));
+  DIALING_MODES.forEach(m => idx.push({ text: `${m.name} ${m.how} ${m.best} ${m.analogy} ${m.note || ''}`, label: m.name, sectionId: 't1s3', tier: 0, type: 'Dialing Mode' }));
+  LIFECYCLE_STEPS.forEach(s => idx.push({ text: `${s.title} ${s.desc} ${(s.checks || []).join(' ')}`, label: s.title, sectionId: 't1s4', tier: 0, type: 'Lifecycle Step' }));
+  GLOSSARY.forEach(g => idx.push({ text: `${g.term} ${g.def}`, label: g.term, sectionId: 't1s5', tier: 0, type: 'Glossary' }));
+  PREREQUISITES.forEach(p => idx.push({ text: `${p.title} ${p.detail}`, label: p.title, sectionId: 't2s1', tier: 1, type: 'Prerequisite' }));
+  SETUP_SEQUENCE.forEach(s => idx.push({ text: s, label: s, sectionId: 't2s1', tier: 1, type: 'Setup Step' }));
+  FORMAT_RULES.forEach(r => idx.push({ text: r, label: r.substring(0, 50), sectionId: 't2s2', tier: 1, type: 'Format Rule' }));
+  COLUMN_TABS.forEach(c => idx.push({ text: `${c.name} ${c.content}`, label: c.name, sectionId: 't2s2', tier: 1, type: 'Column Type' }));
+  DNC_TYPES.forEach(d => idx.push({ text: `${d.name} ${d.desc}`, label: d.name, sectionId: 't2s3', tier: 1, type: 'DNC Type' }));
+  DNC_RULES.forEach(r => idx.push({ text: r, label: r.substring(0, 50), sectionId: 't2s3', tier: 1, type: 'DNC Rule' }));
+  WRAP_UP_MAPPINGS.forEach(w => idx.push({ text: `${w.code} ${w.category} ${w.effect}`, label: w.code, sectionId: 't2s5', tier: 1, type: 'Wrap-Up Mapping' }));
+  SYSTEM_WRAPUPS.forEach(w => idx.push({ text: w, label: w.substring(0, 40), sectionId: 't2s5', tier: 1, type: 'System Wrap-Up' }));
+  EXAMPLE_RULES.forEach(r => idx.push({ text: `${r.title} ${r.type} ${r.condition} ${r.action}`, label: r.title, sectionId: 't2s6', tier: 1, type: 'Rule Example' }));
+  CAMPAIGN_RULE_CARDS.forEach(r => idx.push({ text: `${r.title} ${r.condition} ${r.action} ${r.use}`, label: r.title, sectionId: 't2s7', tier: 1, type: 'Campaign Rule' }));
+  CAMPAIGN_METRICS.forEach(m => idx.push({ text: `${m.metric} ${m.healthy} ${m.warning} ${m.critical}`, label: m.metric, sectionId: 't2s8', tier: 1, type: 'Metric' }));
+  CAPACITY_TABLE.forEach(c => idx.push({ text: `${c.model} ${c.calls} ${c.use}`, label: c.model, sectionId: 't3s1', tier: 2, type: 'Capacity' }));
+  PREDICTIVE_PRACTICES.forEach(p => idx.push({ text: p.text, label: p.text.substring(0, 50), sectionId: 't3s2', tier: 2, type: 'Practice' }));
+  ARCHITECT_CAPABILITIES.forEach(c => idx.push({ text: c, label: c.substring(0, 50), sectionId: 't3s4', tier: 2, type: 'Flow Capability' }));
+  SCRIPT_VARIABLES.forEach(v => idx.push({ text: `${v[0]} ${v[1]}`, label: v[0], sectionId: 't3s5', tier: 2, type: 'Script Variable' }));
+  API_ENDPOINTS.forEach(a => idx.push({ text: `${a.method} ${a.path} ${a.use}`, label: `${a.method} ${a.path}`, sectionId: 't3s6', tier: 2, type: 'API' }));
+  CRM_INTEGRATIONS.forEach(c => idx.push({ text: `${c.name} ${c.desc}`, label: c.name, sectionId: 't3s6', tier: 2, type: 'Integration' }));
+  PLATFORM_LIMITS.forEach(l => idx.push({ text: `${l[0]} ${l[1]} ${l[2]}`, label: l[0], sectionId: 't3s7', tier: 2, type: 'Platform Limit' }));
+  LICENSE_MATRIX.forEach(l => idx.push({ text: `${l[0]}`, label: l[0], sectionId: 't3s8', tier: 2, type: 'License Feature' }));
+  TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s9', tier: 2, type: 'Troubleshooting' }));
+  return idx;
+})();
+
+// ══════════════════════════════════════════════════════════════
 // SUB-COMPONENTS
 // ══════════════════════════════════════════════════════════════
 const FontLoader = () => (
@@ -1199,7 +1234,14 @@ const GenesysOutboundGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDark
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase();
-    return SECTIONS.filter(s => s.title.toLowerCase().includes(q)).slice(0, 8);
+    const seen = new Set();
+    return SEARCH_INDEX.filter(entry => {
+      if (!entry.text.toLowerCase().includes(q)) return false;
+      const key = `${entry.sectionId}-${entry.label}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 12);
   }, [searchQuery]);
 
   const scrollToSection = (id) => {
@@ -1263,19 +1305,27 @@ const GenesysOutboundGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDark
               <button onClick={() => setSearchOpen(!searchOpen)} className="p-1.5 rounded cursor-pointer" style={{ color: C.t3 }}>
                 <Search size={16} />
               </button>
-              {searchOpen && (
-                <div className="absolute right-0 top-10 w-72 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
-                  <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search sections..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-                  {searchResults.map(r => (
-                    <button key={r.id} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.id), 100); }}
-                      className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                      <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
-                      {r.title}
-                    </button>
-                  ))}
-                </div>
-              )}
+                {searchOpen && (
+                  <div className="absolute right-0 top-10 w-80 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
+                    <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search all content..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                    <div style={{ maxHeight: 320, overflowY: 'auto' }}>
+                      {searchResults.map((r, i) => (
+                        <button key={i} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.sectionId), 100); }}
+                          className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
+                          onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
+                            <span className="truncate font-medium" style={{ color: C.t1 }}>{r.label}</span>
+                          </div>
+                          <div className="ml-4 mt-0.5 text-[10px]" style={{ color: C.t3, fontFamily: MONO }}>{r.type} · Tier {r.tier + 1}</div>
+                        </button>
+                      ))}
+                      {searchQuery.trim() && searchResults.length === 0 && (
+                        <div className="text-xs px-3 py-4 text-center" style={{ color: C.t3 }}>No results for "{searchQuery}"</div>
+                      )}
+                    </div>
+                  </div>
+                )}
             </div>
           </div>
         </div>

@@ -383,6 +383,39 @@ const TROUBLESHOOTING = [
 ];
 
 // ══════════════════════════════════════════════════════════════
+// SEARCH INDEX
+// ══════════════════════════════════════════════════════════════
+const SEARCH_INDEX = (() => {
+  const idx = [];
+  SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
+  ANALYTICS_USE_CASES.forEach(u => idx.push({ text: `${u.label} ${u.desc}`, label: u.label, sectionId: 't1s1', tier: 0, type: 'Use Case' }));
+  BUILDING_BLOCKS.forEach(b => idx.push({ text: `${b.label} ${b.sub}`, label: b.label, sectionId: 't1s2', tier: 0, type: 'Building Block' }));
+  Object.entries(BLOCK_TOOLTIPS).forEach(([k, v]) => {
+    const node = BUILDING_BLOCKS.find(n => n.id === k);
+    idx.push({ text: `${node?.label || k} ${v.explanation} ${v.analogy}`, label: node?.label || k, sectionId: 't1s2', tier: 0, type: 'Building Block' });
+  });
+  ANALYTICS_TYPES.forEach(a => idx.push({ text: `${a.name} ${a.desc} ${a.examples.join(' ')} ${a.latency} ${a.bestFor}`, label: a.name, sectionId: 't1s3', tier: 0, type: 'Analytics Type' }));
+  KEY_METRICS.forEach(m => idx.push({ text: `${m.metric} ${m.what} ${m.healthy} ${m.why}`, label: m.metric, sectionId: 't1s4', tier: 0, type: 'Metric' }));
+  GLOSSARY.forEach(g => idx.push({ text: `${g.term} ${g.def} ${g.tier}`, label: g.term, sectionId: 't1s5', tier: 0, type: 'Glossary' }));
+  PREREQUISITES.forEach(p => idx.push({ text: `${p.title} ${p.detail}`, label: p.title, sectionId: 't2s1', tier: 1, type: 'Prerequisite' }));
+  PERFORMANCE_VIEWS.forEach(v => idx.push({ text: `${v.name} ${v.desc} ${v.columns} ${v.use}`, label: v.name, sectionId: 't2s2', tier: 1, type: 'View' }));
+  WIDGET_TYPES.forEach(w => idx.push({ text: `${w.type} ${w.desc} ${w.bestFor}`, label: w.type, sectionId: 't2s3', tier: 1, type: 'Widget' }));
+  INTERACTION_FILTERS.forEach(f => idx.push({ text: `${f.filter} ${f.desc}`, label: f.filter, sectionId: 't2s4', tier: 1, type: 'Filter' }));
+  EXPORT_FORMATS.forEach(f => idx.push({ text: `${f.format} ${f.desc} ${f.limit}`, label: f.format, sectionId: 't2s6', tier: 1, type: 'Export' }));
+  SUPERVISOR_REPORTS.forEach(r => idx.push({ text: `${r.report} ${r.desc} ${r.frequency}`, label: r.report, sectionId: 't2s8', tier: 1, type: 'Report' }));
+  GAMIFICATION_FEATURES.forEach(f => idx.push({ text: `${f.feature} ${f.desc}`, label: f.feature, sectionId: 't2s7', tier: 1, type: 'Gamification' }));
+  DATA_ARCHITECTURE.forEach(d => idx.push({ text: `${d.layer} ${d.desc} ${d.retention}`, label: d.layer, sectionId: 't3s1', tier: 2, type: 'Architecture' }));
+  API_ENDPOINTS.forEach(e => idx.push({ text: `${e.method} ${e.path} ${e.use}`, label: `${e.method} ${e.path}`, sectionId: 't3s2', tier: 2, type: 'API' }));
+  QUERY_EXAMPLES.forEach(q => idx.push({ text: `${q.title} ${q.desc} ${q.code}`, label: q.title, sectionId: 't3s4', tier: 2, type: 'Query Example' }));
+  EXTERNAL_TOOLS.forEach(t => idx.push({ text: `${t.name} ${t.desc} ${t.setup}`, label: t.name, sectionId: 't3s3', tier: 2, type: 'External Tool' }));
+  SPEECH_TEXT_FEATURES.forEach(f => idx.push({ text: `${f.feature} ${f.desc} ${f.config}`, label: f.feature, sectionId: 't3s5', tier: 2, type: 'Speech/Text Feature' }));
+  PLATFORM_LIMITS.forEach(r => idx.push({ text: `${r[0]} ${r[1]} ${r[2]}`, label: r[0], sectionId: 't3s6', tier: 2, type: 'Limit' }));
+  LICENSE_MATRIX.forEach(r => idx.push({ text: `${r[0]} GC1:${r[1]} GC2:${r[2]} GC3:${r[3]}`, label: String(r[0]), sectionId: 't3s7', tier: 2, type: 'License Feature' }));
+  TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s8', tier: 2, type: 'Troubleshooting' }));
+  return idx;
+})();
+
+// ══════════════════════════════════════════════════════════════
 // SUB-COMPONENTS
 // ══════════════════════════════════════════════════════════════
 const FontLoader = () => (
@@ -1141,7 +1174,14 @@ const GenesysAnalyticsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase();
-    return SECTIONS.filter(s => s.title.toLowerCase().includes(q)).slice(0, 8);
+    const seen = new Set();
+    return SEARCH_INDEX.filter(entry => {
+      if (!entry.text.toLowerCase().includes(q)) return false;
+      const key = `${entry.sectionId}-${entry.label}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 12);
   }, [searchQuery]);
 
   const scrollToSection = (id) => {
@@ -1206,18 +1246,26 @@ const GenesysAnalyticsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
                 <Search size={16} />
               </button>
               {searchOpen && (
-                <div className="absolute right-0 top-10 w-72 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
-                  <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search sections..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-                  {searchResults.map(r => (
-                    <button key={r.id} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.id), 100); }}
-                      className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                      <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
-                      {r.title}
-                    </button>
-                  ))}
-                </div>
-              )}
+                  <div className="absolute right-0 top-10 w-80 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
+                    <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search all content..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                    <div style={{ maxHeight: 320, overflowY: 'auto' }}>
+                      {searchResults.map((r, i) => (
+                        <button key={i} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.sectionId), 100); }}
+                          className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
+                          onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
+                            <span className="truncate font-medium" style={{ color: C.t1 }}>{r.label}</span>
+                          </div>
+                          <div className="ml-4 mt-0.5 text-[10px]" style={{ color: C.t3, fontFamily: MONO }}>{r.type} · Tier {r.tier + 1}</div>
+                        </button>
+                      ))}
+                      {searchQuery.trim() && searchResults.length === 0 && (
+                        <div className="text-xs px-3 py-4 text-center" style={{ color: C.t3 }}>No results for "{searchQuery}"</div>
+                      )}
+                    </div>
+                  </div>
+                )}
             </div>
           </div>
         </div>

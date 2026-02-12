@@ -304,6 +304,38 @@ const TROUBLESHOOTING = [
 ];
 
 // ══════════════════════════════════════════════════════════════
+// SEARCH INDEX
+// ══════════════════════════════════════════════════════════════
+const SEARCH_INDEX = (() => {
+  const idx = [];
+  SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
+  WFM_PILLARS.forEach(p => idx.push({ text: `${p.label} ${p.desc}`, label: p.label, sectionId: 't1s1', tier: 0, type: 'Pillar' }));
+  LIFECYCLE_STEPS.forEach(s => idx.push({ text: `${s.title} ${s.desc}`, label: s.title, sectionId: 't1s2', tier: 0, type: 'Lifecycle Step' }));
+  BUILDING_BLOCKS.forEach(b => idx.push({ text: `${b.name} ${b.explanation} ${b.analogy}`, label: b.name, sectionId: 't1s3', tier: 0, type: 'Building Block' }));
+  IMPACT_METRICS.forEach(m => idx.push({ text: `${m.scenario} ${m.cost} ${m.impact}`, label: m.scenario, sectionId: 't1s4', tier: 0, type: 'Impact Scenario' }));
+  GLOSSARY.forEach(g => idx.push({ text: `${g.term} ${g.def}`, label: g.term, sectionId: 't1s5', tier: 0, type: 'Glossary' }));
+  PREREQUISITES.forEach(p => idx.push({ text: `${p.title} ${p.detail}`, label: p.title, sectionId: 't2s1', tier: 1, type: 'Prerequisite' }));
+  SETUP_SEQUENCE.forEach(s => idx.push({ text: s, label: s, sectionId: 't2s1', tier: 1, type: 'Setup Step' }));
+  FORECAST_METHODS.forEach(m => idx.push({ text: `${m.name} ${m.desc} ${m.best}`, label: m.name, sectionId: 't2s2', tier: 1, type: 'Forecast Method' }));
+  FORECAST_HORIZONS.forEach(h => idx.push({ text: `${h.horizon} ${h.range} ${h.use} ${h.accuracy}`, label: h.horizon, sectionId: 't2s2', tier: 1, type: 'Forecast Horizon' }));
+  WORK_PLAN_CONSTRAINTS.forEach(c => idx.push({ text: `${c.constraint} ${c.desc}`, label: c.constraint, sectionId: 't2s3', tier: 1, type: 'Constraint' }));
+  SCHEDULING_GOALS.forEach(g => idx.push({ text: `${g.goal} ${g.desc} ${g.tradeoff}`, label: g.goal, sectionId: 't2s4', tier: 1, type: 'Schedule Goal' }));
+  ADHERENCE_STATES.forEach(a => idx.push({ text: `${a.state} ${a.desc}`, label: a.state, sectionId: 't2s6', tier: 1, type: 'Adherence State' }));
+  PTO_RULES.forEach(p => idx.push({ text: `${p.feature} ${p.desc}`, label: p.feature, sectionId: 't2s7', tier: 1, type: 'PTO Feature' }));
+  REPORTING_METRICS.forEach(m => idx.push({ text: `${m.report} ${m.metric} ${m.healthy} ${m.warning} ${m.critical}`, label: m.report, sectionId: 't2s8', tier: 1, type: 'Metric' }));
+  ALGORITHM_COMPONENTS.forEach(a => idx.push({ text: `${a.name} ${a.desc} ${a.example}`, label: a.name, sectionId: 't3s1', tier: 2, type: 'Algorithm' }));
+  OPTIMIZER_CONCEPTS.forEach(o => idx.push({ text: `${o.concept} ${o.desc}`, label: o.concept, sectionId: 't3s2', tier: 2, type: 'Optimizer Concept' }));
+  MULTICHANNEL_CONFIG.forEach(c => idx.push({ text: `${c.channel} ${c.concurrency} ${c.forecasting} ${c.scheduling}`, label: c.channel, sectionId: 't3s3', tier: 2, type: 'Channel Config' }));
+  API_ENDPOINTS.forEach(a => idx.push({ text: `${a.method} ${a.path} ${a.use}`, label: `${a.method} ${a.path}`, sectionId: 't3s4', tier: 2, type: 'API' }));
+  INTEGRATION_OPTIONS.forEach(i => idx.push({ text: `${i.name} ${i.desc}`, label: i.name, sectionId: 't3s4', tier: 2, type: 'Integration' }));
+  INTRADAY_STRATEGIES.forEach(s => idx.push({ text: `${s.strategy} ${s.desc} ${s.impact}`, label: s.strategy, sectionId: 't3s5', tier: 2, type: 'Strategy' }));
+  PLATFORM_LIMITS.forEach(l => idx.push({ text: `${l[0]} ${l[1]} ${l[2]}`, label: l[0], sectionId: 't3s6', tier: 2, type: 'Platform Limit' }));
+  LICENSE_MATRIX.forEach(l => idx.push({ text: `${l[0]}`, label: l[0], sectionId: 't3s7', tier: 2, type: 'License Feature' }));
+  TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s8', tier: 2, type: 'Troubleshooting' }));
+  return idx;
+})();
+
+// ══════════════════════════════════════════════════════════════
 // SUB-COMPONENTS
 // ══════════════════════════════════════════════════════════════
 const FontLoader = () => (
@@ -1057,7 +1089,14 @@ const GenesysWFMGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp 
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase();
-    return SECTIONS.filter(s => s.title.toLowerCase().includes(q)).slice(0, 8);
+    const seen = new Set();
+    return SEARCH_INDEX.filter(entry => {
+      if (!entry.text.toLowerCase().includes(q)) return false;
+      const key = `${entry.sectionId}-${entry.label}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 12);
   }, [searchQuery]);
 
   const scrollToSection = (id) => {
@@ -1121,19 +1160,27 @@ const GenesysWFMGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp 
               <button onClick={() => setSearchOpen(!searchOpen)} className="p-1.5 rounded cursor-pointer" style={{ color: C.t3 }}>
                 <Search size={16} />
               </button>
-              {searchOpen && (
-                <div className="absolute right-0 top-10 w-72 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
-                  <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search sections..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-                  {searchResults.map(r => (
-                    <button key={r.id} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.id), 100); }}
-                      className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                      <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
-                      {r.title}
-                    </button>
-                  ))}
-                </div>
-              )}
+                {searchOpen && (
+                  <div className="absolute right-0 top-10 w-80 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
+                    <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search all content..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                    <div style={{ maxHeight: 320, overflowY: 'auto' }}>
+                      {searchResults.map((r, i) => (
+                        <button key={i} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.sectionId), 100); }}
+                          className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
+                          onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
+                            <span className="truncate font-medium" style={{ color: C.t1 }}>{r.label}</span>
+                          </div>
+                          <div className="ml-4 mt-0.5 text-[10px]" style={{ color: C.t3, fontFamily: MONO }}>{r.type} · Tier {r.tier + 1}</div>
+                        </button>
+                      ))}
+                      {searchQuery.trim() && searchResults.length === 0 && (
+                        <div className="text-xs px-3 py-4 text-center" style={{ color: C.t3 }}>No results for "{searchQuery}"</div>
+                      )}
+                    </div>
+                  </div>
+                )}
             </div>
           </div>
         </div>

@@ -346,6 +346,37 @@ const TROUBLESHOOTING = [
 ];
 
 // ══════════════════════════════════════════════════════════════
+// SEARCH INDEX
+// ══════════════════════════════════════════════════════════════
+const SEARCH_INDEX = (() => {
+  const idx = [];
+  SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
+  QM_PURPOSES.forEach(p => idx.push({ text: `${p.label} ${p.desc}`, label: p.label, sectionId: 't1s1', tier: 0, type: 'Purpose' }));
+  LIFECYCLE_STEPS.forEach(s => idx.push({ text: `${s.title} ${s.desc}`, label: s.title, sectionId: 't1s2', tier: 0, type: 'Lifecycle Step' }));
+  BUILDING_BLOCKS.forEach(b => idx.push({ text: `${b.label} ${b.sub} ${b.explanation} ${b.analogy}`, label: b.label.replace('\n', ' '), sectionId: 't1s3', tier: 0, type: 'Building Block' }));
+  QUALITY_PROGRAM_TYPES.forEach(p => idx.push({ text: `${p.name} ${p.method} ${p.pros.join(' ')} ${p.cons.join(' ')}`, label: p.name, sectionId: 't1s4', tier: 0, type: 'Program Type' }));
+  GLOSSARY.forEach(g => idx.push({ text: `${g.term} ${g.def} ${g.tier}`, label: g.term, sectionId: 't1s5', tier: 0, type: 'Glossary' }));
+  PREREQUISITES.forEach(p => idx.push({ text: `${p.title} ${p.detail}`, label: p.title, sectionId: 't2s1', tier: 1, type: 'Prerequisite' }));
+  QUESTION_TYPES.forEach(q => idx.push({ text: `${q.type} ${q.desc} ${q.weight} ${q.use}`, label: q.type, sectionId: 't2s2', tier: 1, type: 'Question Type' }));
+  FORM_BEST_PRACTICES.forEach(p => idx.push({ text: p.text, label: p.text.substring(0, 50) + '...', sectionId: 't2s2', tier: 1, type: 'Best Practice' }));
+  POLICY_CONDITIONS.forEach(c => idx.push({ text: `${c.condition} ${c.desc}`, label: c.condition, sectionId: 't2s3', tier: 1, type: 'Policy Condition' }));
+  EVALUATOR_WORKFLOW.forEach(w => idx.push({ text: `${w.action} ${w.detail}`, label: w.action, sectionId: 't2s4', tier: 1, type: 'Workflow Step' }));
+  CALIBRATION_STEPS.forEach((s, i) => idx.push({ text: s, label: `Calibration Step ${i + 1}`, sectionId: 't2s5', tier: 1, type: 'Calibration' }));
+  COACHING_FEATURES.forEach(f => idx.push({ text: `${f.feature} ${f.desc}`, label: f.feature, sectionId: 't2s6', tier: 1, type: 'Coaching' }));
+  RECORDING_TYPES.forEach(r => idx.push({ text: `${r.type} ${r.desc} ${r.when}`, label: r.type, sectionId: 't2s7', tier: 1, type: 'Recording' }));
+  DASHBOARD_METRICS.forEach(m => idx.push({ text: `${m.metric} ${m.desc} ${m.target}`, label: m.metric, sectionId: 't2s8', tier: 1, type: 'Dashboard Metric' }));
+  ANALYTICS_LAYERS.forEach(l => idx.push({ text: `${l.name} ${l.desc} ${l.features.join(' ')}`, label: l.name, sectionId: 't3s1', tier: 2, type: 'Analytics Layer' }));
+  AI_CAPABILITIES.forEach(c => idx.push({ text: `${c.name} ${c.desc} ${c.benefit}`, label: c.name, sectionId: 't3s2', tier: 2, type: 'AI Capability' }));
+  ADVANCED_SCORING.forEach(t => idx.push({ text: `${t.technique} ${t.desc}`, label: t.technique, sectionId: 't3s3', tier: 2, type: 'Evaluation' }));
+  API_ENDPOINTS.forEach(e => idx.push({ text: `${e.method} ${e.path} ${e.use}`, label: `${e.method} ${e.path}`, sectionId: 't3s4', tier: 2, type: 'API' }));
+  COMPLIANCE_TOPICS.forEach(c => idx.push({ text: `${c.topic} ${c.desc} ${c.risk}`, label: c.topic, sectionId: 't3s5', tier: 2, type: 'Compliance' }));
+  PLATFORM_LIMITS.forEach(r => idx.push({ text: `${r[0]} ${r[1]} ${r[2]}`, label: r[0], sectionId: 't3s6', tier: 2, type: 'Limit' }));
+  LICENSE_MATRIX.forEach(r => idx.push({ text: `${r[0]} GC1:${r[1]} GC2:${r[2]} GC3:${r[3]}`, label: String(r[0]), sectionId: 't3s7', tier: 2, type: 'License Feature' }));
+  TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s8', tier: 2, type: 'Troubleshooting' }));
+  return idx;
+})();
+
+// ══════════════════════════════════════════════════════════════
 // SUB-COMPONENTS
 // ══════════════════════════════════════════════════════════════
 const FontLoader = () => (
@@ -1142,7 +1173,14 @@ const GenesysQualityGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkP
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase();
-    return SECTIONS.filter(s => s.title.toLowerCase().includes(q)).slice(0, 8);
+    const seen = new Set();
+    return SEARCH_INDEX.filter(entry => {
+      if (!entry.text.toLowerCase().includes(q)) return false;
+      const key = `${entry.sectionId}-${entry.label}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 12);
   }, [searchQuery]);
 
   const scrollToSection = (id) => {
@@ -1207,18 +1245,26 @@ const GenesysQualityGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkP
                 <Search size={16} />
               </button>
               {searchOpen && (
-                <div className="absolute right-0 top-10 w-72 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
-                  <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search sections..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-                  {searchResults.map(r => (
-                    <button key={r.id} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.id), 100); }}
-                      className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                      <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
-                      {r.title}
-                    </button>
-                  ))}
-                </div>
-              )}
+                  <div className="absolute right-0 top-10 w-80 rounded-lg shadow-xl p-3 z-50" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
+                    <input autoFocus className="w-full px-3 py-2 rounded text-sm mb-2" style={{ backgroundColor: C.bg3, border: `1px solid ${C.border}`, color: C.t1, fontFamily: SANS }} placeholder="Search all content..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                    <div style={{ maxHeight: 320, overflowY: 'auto' }}>
+                      {searchResults.map((r, i) => (
+                        <button key={i} onClick={() => { handleTierSwitch(r.tier); setTimeout(() => scrollToSection(r.sectionId), 100); }}
+                          className="w-full text-left px-3 py-2 rounded text-xs cursor-pointer transition-colors" style={{ color: C.t2, fontFamily: SANS }}
+                          onMouseEnter={e => e.currentTarget.style.backgroundColor = C.bg3} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: TIER_COLORS[r.tier] }} />
+                            <span className="truncate font-medium" style={{ color: C.t1 }}>{r.label}</span>
+                          </div>
+                          <div className="ml-4 mt-0.5 text-[10px]" style={{ color: C.t3, fontFamily: MONO }}>{r.type} · Tier {r.tier + 1}</div>
+                        </button>
+                      ))}
+                      {searchQuery.trim() && searchResults.length === 0 && (
+                        <div className="text-xs px-3 py-4 text-center" style={{ color: C.t3 }}>No results for "{searchQuery}"</div>
+                      )}
+                    </div>
+                  </div>
+                )}
             </div>
           </div>
         </div>
