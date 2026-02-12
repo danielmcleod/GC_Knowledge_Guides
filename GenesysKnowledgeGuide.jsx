@@ -588,7 +588,7 @@ const Tier2Content = ({ sectionRefs }) => {
           ))}
         </div>
         <SubHeading>Labels vs Categories</SubHeading>
-        <Paragraph>Categories provide hierarchical organization (an article lives in ONE category). Labels provide flat, cross-cutting tags (an article can have MANY labels). Use categories for primary taxonomy and labels for secondary attributes. Example: an article in category "Billing > Refunds" might also have labels "VIP", "Holiday Policy", and "Bot-Ready".</Paragraph>
+        <Paragraph>Categories provide hierarchical organization (an article lives in ONE category). Labels provide flat, cross-cutting tags (an article can have MANY labels). Use categories for primary taxonomy and labels for secondary attributes. Example: an article in category "Billing &gt; Refunds" might also have labels "VIP", "Holiday Policy", and "Bot-Ready".</Paragraph>
         <CalloutBox type="info">Plan your category hierarchy before creating articles. Restructuring categories after articles are assigned requires reassigning each article individually. Labels, by contrast, are easy to add and remove at any time.</CalloutBox>
       </section>
 

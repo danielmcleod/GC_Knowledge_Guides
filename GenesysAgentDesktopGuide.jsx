@@ -760,7 +760,7 @@ My name is Alex Chen and I'll be happy to help you today."`}</CodeBlock>
             </div>
           ))}
         </div>
-        <CalloutBox type="info">Monitor, Whisper, and Barge require the Conversation > Monitoring permission. Supervisors can only monitor agents on queues they have access to within their division. The agent sees a visual indicator when being monitored (configurable per org).</CalloutBox>
+        <CalloutBox type="info">Monitor, Whisper, and Barge require the Conversation &gt; Monitoring permission. Supervisors can only monitor agents on queues they have access to within their division. The agent sees a visual indicator when being monitored (configurable per org).</CalloutBox>
       </section>
 
       {/* T2S8 */}
