@@ -7,6 +7,7 @@ import {
   FileText, Database, Activity, BarChart3, Target, PhoneCall, Monitor,
   Hash, Layers, Eye, ClipboardList, Volume2, Sun, Moon, ArrowLeft
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1406,10 +1407,7 @@ const GenesysOutboundGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDark
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Outbound Dialing — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React • Tailwind CSS • lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Outbound Dialing — Interactive Knowledge Guide" />
     </div>
   );
 };

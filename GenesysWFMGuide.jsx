@@ -7,6 +7,7 @@ import {
   FileText, Database, Activity, BarChart3, Target, Monitor,
   Hash, Layers, Eye, Sun, Moon, Calendar, Timer, TrendingUp, Award, Lock, UserCheck, Filter
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1261,10 +1262,7 @@ const GenesysWFMGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp 
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Workforce Management — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React • Tailwind CSS • lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Workforce Management — Interactive Knowledge Guide" />
     </div>
   );
 };

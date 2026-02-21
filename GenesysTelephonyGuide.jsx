@@ -9,6 +9,7 @@ import {
   Shuffle, UserCheck, Radio, Headphones, Globe, Calendar, Timer, TrendingUp,
   Award, Key, Lock, Unlock, MapPin, Wifi, Server, Cloud, HardDrive, Cpu as CpuIcon
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1257,10 +1258,7 @@ const GenesysTelephonyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Telephony & Edge — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React * Tailwind CSS * lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Telephony & Edge — Interactive Knowledge Guide" />
     </div>
   );
 };

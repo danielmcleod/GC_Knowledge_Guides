@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin, Code, Terminal, Box, Play, Pause, RotateCw,
   Workflow, Bot, BrainCircuit, PenTool, Wrench
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1276,10 +1277,7 @@ const GenesysArchitectGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Architect Flows — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React * Tailwind CSS * lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Architect Flows — Interactive Knowledge Guide" />
     </div>
   );
 };

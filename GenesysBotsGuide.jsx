@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin, Bot, Brain, Mic, Terminal, Code,
   MessageCircle, Languages, Workflow, HelpCircle, ToggleLeft, SlidersHorizontal
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1323,10 +1324,7 @@ const GenesysBotsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Bots & Conversational AI — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React * Tailwind CSS * lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Bots & Conversational AI — Interactive Knowledge Guide" />
     </div>
   );
 };

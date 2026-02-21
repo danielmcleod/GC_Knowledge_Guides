@@ -23,6 +23,7 @@ import GenesysIntegrationsGuide from '../GenesysIntegrationsGuide.jsx';
 import GenesysPlatformAPIGuide from '../GenesysPlatformAPIGuide.jsx';
 import GenesysCXasCodeGuide from '../GenesysCXasCodeGuide.jsx';
 import GenesysAgentDesktopGuide from '../GenesysAgentDesktopGuide.jsx';
+import Footer from './Footer.jsx';
 
 const MONO = "'JetBrains Mono', monospace";
 const SANS = "'IBM Plex Sans', sans-serif";
@@ -343,7 +344,7 @@ const App = () => {
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-14">
           <div className="flex items-center gap-2">
             <Layers size={20} style={{ color: '#F97316' }} />
-            <span className="font-bold text-sm" style={{ fontFamily: MONO, color: '#F97316' }}>GENESYS CLOUD KNOWLEDGE</span>
+            <span className="font-bold text-sm" style={{ fontFamily: MONO, color: '#F97316' }}>Interactive Knowledge Guides</span>
           </div>
           <button onClick={() => setIsDark(!isDark)} className="p-1.5 rounded cursor-pointer transition-colors" style={{ color: 'var(--t3)' }} aria-label="Toggle theme">
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
@@ -413,11 +414,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="py-8 text-center" style={{ borderTop: '1px solid var(--border)' }}>
-        <div className="text-xs" style={{ color: 'var(--t3)', fontFamily: MONO }}>Genesys Cloud CX — Interactive Knowledge Guides</div>
-        <div className="text-[10px] mt-1" style={{ color: 'var(--bg4)' }}>Built with React + Tailwind CSS + lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud CX — Interactive Knowledge Guides" />
     </div>
   );
 };

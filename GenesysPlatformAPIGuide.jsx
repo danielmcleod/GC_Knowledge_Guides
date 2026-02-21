@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin, Code, Terminal, Wifi, Link, Server,
   Package, Send, Repeat, AlertOctagon, Box, Plug
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1185,10 +1186,7 @@ const GenesysPlatformAPIGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsD
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Platform API & SDK — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React * Tailwind CSS * lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Platform API & SDK — Interactive Knowledge Guide" />
     </div>
   );
 };

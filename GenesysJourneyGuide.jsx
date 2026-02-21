@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin, MousePointer, ShoppingCart, Crosshair,
   PieChart, BrainCircuit, Workflow, Send, Code, Link, Gauge
 } from 'lucide-react';
+import Footer from './src/Footer.jsx';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -1099,10 +1100,7 @@ const GenesysJourneyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkP
       </div>
 
       {/* FOOTER */}
-      <footer className="py-8 text-center" style={{ borderTop: `1px solid ${C.border}` }}>
-        <div className="text-xs" style={{ color: C.t3, fontFamily: MONO }}>Genesys Cloud Journey Management & Predictive Engagement — Interactive Knowledge Guide</div>
-        <div className="text-[10px] mt-1" style={{ color: C.bg4 }}>Built with React * Tailwind CSS * lucide-react</div>
-      </footer>
+      <Footer title="Genesys Cloud Journey Management & Predictive Engagement — Interactive Knowledge Guide" />
     </div>
   );
 };
