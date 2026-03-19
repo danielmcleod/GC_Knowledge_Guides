@@ -253,7 +253,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   KNOWLEDGE_USE_CASES.forEach(u => idx.push({ text: `${u.label} ${u.desc}`, label: u.label, sectionId: 't1s1', tier: 0, type: 'Use Case' }));
@@ -446,6 +446,7 @@ const Tier1Content = ({ sectionRefs }) => (
           return [node?.label || k, v.explanation, v.analogy];
         })}
       />
+      <CalloutBox type="info">Portal administrators can now filter knowledge portal results by article labels. Think of labels as colored sticky tabs on your library books — by configuring label-based filtering through the API, each portal can show only the articles tagged with its specific label set. This means knowledge authors can maintain a single article in one knowledge base and serve it to multiple portals, each with its own curated view. Instead of duplicating content across portals, you tag articles with the right labels and let each portal filter for its own. The result is less duplicate content, lower maintenance overhead, and a cleaner experience for portal visitors.</CalloutBox>
     </section>
 
     {/* T1S3 */}
@@ -834,8 +835,8 @@ Content-Type: application/json
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysKnowledgeGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysKnowledgeGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -901,6 +902,16 @@ const GenesysKnowledgeGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   PhoneOutgoing, MessageSquare, Headphones, BarChart3, Shield,
   Workflow, Sun, Moon, ArrowRight, BookOpen, Layers, Lock, Clock,
   GitBranch, Bot, Globe, Search, Map, Trophy, Users, Phone,
-  Plug, Code, Terminal, ChevronDown, ChevronUp, Monitor
+  Plug, Code, Terminal, ChevronDown, ChevronUp, Monitor, X
 } from 'lucide-react';
-import GenesysOutboundGuide from '../GenesysOutboundGuide.jsx';
-import GenesysRoutingGuide from '../GenesysRoutingGuide.jsx';
-import GenesysWFMGuide from '../GenesysWFMGuide.jsx';
-import GenesysAnalyticsGuide from '../GenesysAnalyticsGuide.jsx';
-import GenesysQualityGuide from '../GenesysQualityGuide.jsx';
-import GenesysSecurityGuide from '../GenesysSecurityGuide.jsx';
-import GenesysArchitectGuide from '../GenesysArchitectGuide.jsx';
-import GenesysBotsGuide from '../GenesysBotsGuide.jsx';
-import GenesysDigitalGuide from '../GenesysDigitalGuide.jsx';
-import GenesysKnowledgeGuide from '../GenesysKnowledgeGuide.jsx';
-import GenesysJourneyGuide from '../GenesysJourneyGuide.jsx';
-import GenesysWEMGuide from '../GenesysWEMGuide.jsx';
-import GenesysDirectoryGuide from '../GenesysDirectoryGuide.jsx';
-import GenesysTelephonyGuide from '../GenesysTelephonyGuide.jsx';
-import GenesysIntegrationsGuide from '../GenesysIntegrationsGuide.jsx';
-import GenesysPlatformAPIGuide from '../GenesysPlatformAPIGuide.jsx';
-import GenesysCXasCodeGuide from '../GenesysCXasCodeGuide.jsx';
-import GenesysAgentDesktopGuide from '../GenesysAgentDesktopGuide.jsx';
+import GenesysOutboundGuide, { SEARCH_INDEX as outboundIndex } from '../GenesysOutboundGuide.jsx';
+import GenesysRoutingGuide, { SEARCH_INDEX as routingIndex } from '../GenesysRoutingGuide.jsx';
+import GenesysWFMGuide, { SEARCH_INDEX as wfmIndex } from '../GenesysWFMGuide.jsx';
+import GenesysAnalyticsGuide, { SEARCH_INDEX as analyticsIndex } from '../GenesysAnalyticsGuide.jsx';
+import GenesysQualityGuide, { SEARCH_INDEX as qualityIndex } from '../GenesysQualityGuide.jsx';
+import GenesysSecurityGuide, { SEARCH_INDEX as securityIndex } from '../GenesysSecurityGuide.jsx';
+import GenesysArchitectGuide, { SEARCH_INDEX as architectIndex } from '../GenesysArchitectGuide.jsx';
+import GenesysBotsGuide, { SEARCH_INDEX as botsIndex } from '../GenesysBotsGuide.jsx';
+import GenesysDigitalGuide, { SEARCH_INDEX as digitalIndex } from '../GenesysDigitalGuide.jsx';
+import GenesysKnowledgeGuide, { SEARCH_INDEX as knowledgeIndex } from '../GenesysKnowledgeGuide.jsx';
+import GenesysJourneyGuide, { SEARCH_INDEX as journeyIndex } from '../GenesysJourneyGuide.jsx';
+import GenesysWEMGuide, { SEARCH_INDEX as wemIndex } from '../GenesysWEMGuide.jsx';
+import GenesysDirectoryGuide, { SEARCH_INDEX as directoryIndex } from '../GenesysDirectoryGuide.jsx';
+import GenesysTelephonyGuide, { SEARCH_INDEX as telephonyIndex } from '../GenesysTelephonyGuide.jsx';
+import GenesysIntegrationsGuide, { SEARCH_INDEX as integrationsIndex } from '../GenesysIntegrationsGuide.jsx';
+import GenesysPlatformAPIGuide, { SEARCH_INDEX as platformapiIndex } from '../GenesysPlatformAPIGuide.jsx';
+import GenesysCXasCodeGuide, { SEARCH_INDEX as cxascodeIndex } from '../GenesysCXasCodeGuide.jsx';
+import GenesysAgentDesktopGuide, { SEARCH_INDEX as agentdesktopIndex } from '../GenesysAgentDesktopGuide.jsx';
 import Footer from './Footer.jsx';
 
 const MONO = "'JetBrains Mono', monospace";
@@ -266,6 +266,43 @@ const GUIDE_COMPONENTS = {
   cxascode: GenesysCXasCodeGuide,
 };
 
+const TIER_COLORS = ['#F97316', '#3B82F6', '#8B5CF6'];
+
+const GUIDE_INDICES = {
+  routing: routingIndex,
+  outbound: outboundIndex,
+  architect: architectIndex,
+  digital: digitalIndex,
+  bots: botsIndex,
+  wfm: wfmIndex,
+  analytics: analyticsIndex,
+  quality: qualityIndex,
+  security: securityIndex,
+  telephony: telephonyIndex,
+  knowledge: knowledgeIndex,
+  journey: journeyIndex,
+  wem: wemIndex,
+  directory: directoryIndex,
+  agentdesktop: agentdesktopIndex,
+  integrations: integrationsIndex,
+  platformapi: platformapiIndex,
+  cxascode: cxascodeIndex,
+};
+
+const GLOBAL_SEARCH_INDEX = (() => {
+  const allGuides = [...GUIDES, ...ADVANCED_GUIDES];
+  const guideMap = Object.fromEntries(allGuides.map(g => [g.id, g]));
+  const global = [];
+  for (const [guideKey, index] of Object.entries(GUIDE_INDICES)) {
+    const guide = guideMap[guideKey];
+    if (!guide || !index) continue;
+    for (const entry of index) {
+      global.push({ ...entry, guideKey, guideTitle: guide.title, guideColor: guide.color });
+    }
+  }
+  return global;
+})();
+
 const GuideCard = ({ g, onClick }) => {
   const Icon = g.icon;
   const available = g.status === 'available';
@@ -321,15 +358,73 @@ const GuideCard = ({ g, onClick }) => {
 
 const App = () => {
   const [activeGuide, setActiveGuide] = useState(null);
+  const [navTarget, setNavTarget] = useState(null);
   const [isDark, setIsDark] = useState(true);
   const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [globalSearchQuery, setGlobalSearchQuery] = useState('');
+  const [globalSearchOpen, setGlobalSearchOpen] = useState(false);
+  const searchInputRef = useRef(null);
+  const searchContainerRef = useRef(null);
 
   const tv = isDark ? THEME_VARS.dark : THEME_VARS.light;
+
+  const globalSearchResults = useMemo(() => {
+    if (!globalSearchQuery.trim()) return [];
+    const q = globalSearchQuery.toLowerCase();
+    const seen = new Set();
+    const results = GLOBAL_SEARCH_INDEX.filter(entry => {
+      if (!entry.text.toLowerCase().includes(q)) return false;
+      const key = `${entry.guideKey}-${entry.sectionId}-${entry.label}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 20);
+    // Group by guide
+    const grouped = {};
+    results.forEach(r => {
+      if (!grouped[r.guideKey]) grouped[r.guideKey] = { guideTitle: r.guideTitle, guideColor: r.guideColor, items: [] };
+      grouped[r.guideKey].items.push(r);
+    });
+    return grouped;
+  }, [globalSearchQuery]);
+
+  const hasResults = Object.keys(globalSearchResults).length > 0;
+
+  // Close search on click outside
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
+        setGlobalSearchOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  // Ctrl+K / Cmd+K shortcut
+  useEffect(() => {
+    const handleKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setGlobalSearchOpen(true);
+        setTimeout(() => searchInputRef.current?.focus(), 50);
+      }
+      if (e.key === 'Escape') setGlobalSearchOpen(false);
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, []);
+
+  const handleGlobalSearchResult = (result) => {
+    setNavTarget({ tier: result.tier, sectionId: result.sectionId });
+    setActiveGuide(result.guideKey);
+    setGlobalSearchOpen(false);
+  };
 
   // If a guide is selected, render it
   const GuideComponent = activeGuide ? GUIDE_COMPONENTS[activeGuide] : null;
   if (GuideComponent) {
-    return <GuideComponent onBack={() => setActiveGuide(null)} isDark={isDark} setIsDark={setIsDark} />;
+    return <GuideComponent onBack={() => { setActiveGuide(null); setNavTarget(null); }} isDark={isDark} setIsDark={setIsDark} initialNav={navTarget} />;
   }
 
   return (
@@ -365,9 +460,78 @@ const App = () => {
           Deep-dive knowledge guides for every major Genesys Cloud module.
           From zero to expert, with interactive diagrams and progressive disclosure.
         </p>
-        <p className="text-xs" style={{ color: 'var(--t3)' }}>
+        <p className="text-xs mb-8" style={{ color: 'var(--t3)' }}>
           {GUIDES.length + ADVANCED_GUIDES.length} guides available — select one below to begin learning.
         </p>
+
+        {/* Global Search */}
+        <div className="max-w-xl mx-auto relative" ref={searchContainerRef}>
+          <div className="relative">
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--t3)' }} />
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Search across all guides...    ⌘K"
+              value={globalSearchQuery}
+              onChange={e => { setGlobalSearchQuery(e.target.value); setGlobalSearchOpen(true); }}
+              onFocus={() => setGlobalSearchOpen(true)}
+              className="w-full pl-10 pr-10 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+              style={{
+                backgroundColor: 'var(--bg2)',
+                border: globalSearchOpen && globalSearchQuery ? '1px solid #F97316' : '1px solid var(--border)',
+                color: 'var(--t1)',
+                fontFamily: SANS,
+              }}
+            />
+            {globalSearchQuery && (
+              <button
+                onClick={() => { setGlobalSearchQuery(''); setGlobalSearchOpen(false); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md cursor-pointer transition-colors"
+                style={{ color: 'var(--t3)' }}
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+
+          {globalSearchOpen && globalSearchQuery.trim() && (
+            <div
+              className="absolute top-full left-0 right-0 mt-2 rounded-xl shadow-xl overflow-hidden z-50"
+              style={{ backgroundColor: 'var(--bg2)', border: '1px solid var(--border)', maxHeight: 400, overflowY: 'auto' }}
+            >
+              {hasResults ? (
+                Object.entries(globalSearchResults).map(([guideKey, group]) => (
+                  <div key={guideKey}>
+                    <div className="sticky top-0 px-3 py-2 flex items-center gap-2" style={{ backgroundColor: 'var(--bg3)', borderBottom: '1px solid var(--border)' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: group.guideColor }} />
+                      <span className="text-[10px] font-semibold uppercase" style={{ fontFamily: MONO, color: group.guideColor }}>{group.guideTitle}</span>
+                    </div>
+                    {group.items.map((r, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleGlobalSearchResult(r)}
+                        className="w-full text-left px-4 py-2.5 flex items-center gap-3 cursor-pointer transition-colors duration-150"
+                        style={{ borderBottom: '1px solid var(--border)' }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--bg3)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; }}
+                      >
+                        <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: TIER_COLORS[r.tier] || TIER_COLORS[0] }} />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-medium truncate" style={{ color: 'var(--t1)', fontFamily: SANS }}>{r.label}</div>
+                          <div className="text-[10px]" style={{ color: 'var(--t3)', fontFamily: MONO }}>{r.type} — Tier {r.tier + 1}</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ))
+              ) : (
+                <div className="px-4 py-8 text-center">
+                  <p className="text-xs" style={{ color: 'var(--t3)', fontFamily: SANS }}>No results found for "{globalSearchQuery}"</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Guide Grid */}

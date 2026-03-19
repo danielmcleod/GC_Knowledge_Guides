@@ -1,0 +1,54 @@
+{
+  "lastScanDate": "2026-03-19",
+  "scanHistory": [
+    {
+      "date": "2026-03-19",
+      "releaseNotesCovered": [
+        "March 16, 2026",
+        "March 9, 2026",
+        "March 2, 2026",
+        "February 23, 2026",
+        "February 16, 2026"
+      ],
+      "itemsScanned": 97,
+      "itemsMatched": 48,
+      "reportFile": "reports/update-plan-2026-03-19.md"
+    },
+    {
+      "date": "2026-03-19",
+      "releaseNotesCovered": [
+        "March 16, 2026",
+        "March 9, 2026",
+        "March 2, 2026",
+        "February 23, 2026",
+        "February 16, 2026"
+      ],
+      "itemsScanned": 66,
+      "itemsMatched": 42,
+      "reportFile": "reports/update-plan-2026-03-19.md"
+    },
+    {
+      "date": "2026-03-19",
+      "releaseNotesCovered": [
+        "March 16, 2026",
+        "March 9, 2026"
+      ],
+      "itemsScanned": 24,
+      "itemsMatched": 14,
+      "reportFile": "reports/update-plan-2026-03-19.md"
+    },
+    {
+      "date": "2026-03-19",
+      "releaseNotesCovered": [
+        "March 16, 2026",
+        "March 9, 2026",
+        "March 2, 2026",
+        "February 23, 2026",
+        "February 16, 2026"
+      ],
+      "itemsScanned": 66,
+      "itemsMatched": 42,
+      "reportFile": "reports/update-plan-2026-03-19.md"
+    }
+  ]
+}

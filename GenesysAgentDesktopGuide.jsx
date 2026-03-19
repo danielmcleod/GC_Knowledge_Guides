@@ -351,7 +351,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   GLOSSARY.forEach(g => idx.push({ text: `${g.term} ${g.def}`, label: g.term, sectionId: 't1s5', tier: 0, type: 'Glossary' }));
@@ -727,6 +727,7 @@ My name is Alex Chen and I'll be happy to help you today."`}</CodeBlock>
         <SubHeading>Knowledge Panel Usage</SubHeading>
         <Paragraph>The Knowledge Panel is available to agents during any interaction. It supports three modes: (1) Automatic suggestions — AI surfaces articles based on conversation context, (2) Manual search — agent types a query and browses results, (3) Share — agent sends a knowledge article link directly to the customer in chat or email. Articles support rich content: text, images, embedded video, and step-by-step instructions.</Paragraph>
         <CalloutBox type="info">Agent Assist requires a published knowledge base with articles in "Published" status. The AI models work best with well-structured articles that have clear titles, concise answers, and relevant keywords. Minimum 20-50 articles recommended for meaningful suggestions.</CalloutBox>
+        <CalloutBox type="info"><strong>New — Genesys Summarization Connector (March 2026):</strong> Administrators can now integrate third-party large language models (LLMs) with AI Studio using the new Genesys Summarization Connector, and configure them to generate Agent Copilot interaction summaries. Think of it like swapping out a generic translator for one who speaks your company's dialect — organizations can customize how summaries are generated to reflect their own terminology, workflows, and priorities rather than relying solely on the built-in summarization engine. This is configured in AI Studio and enables richer, more context-aware wrap-up summaries tailored to how your teams actually work.</CalloutBox>
       </section>
 
       {/* T2S6 */}
@@ -991,8 +992,8 @@ v2.conversations.{conversationId}.recordings // Recording events`}</CodeBlock>
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysAgentDesktopGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysAgentDesktopGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1054,6 +1055,16 @@ const GenesysAgentDesktopGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIs
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

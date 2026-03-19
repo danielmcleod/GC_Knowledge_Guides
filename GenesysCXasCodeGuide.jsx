@@ -360,7 +360,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   WHY_DEVOPS.forEach(w => idx.push({ text: `${w.label} ${w.desc}`, label: w.label, sectionId: 't1s1', tier: 0, type: 'DevOps Benefit' }));
@@ -944,8 +944,8 @@ module "billing_queue" {
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysCXasCodeGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysCXasCodeGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1007,6 +1007,16 @@ const GenesysCXasCodeGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDark
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

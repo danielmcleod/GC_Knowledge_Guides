@@ -402,7 +402,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   BOT_USE_CASES.forEach(u => idx.push({ text: `${u.label} ${u.desc}`, label: u.label, sectionId: 't1s1', tier: 0, type: 'Use Case' }));
@@ -992,6 +992,12 @@ const Tier3Content = ({ sectionRefs }) => (
           </div>
         ))}
       </div>
+      <CalloutBox type="info">
+        <strong>Bring Your Own ASR (March 2026):</strong> Administrators can now integrate third-party automatic speech recognition engines into Architect bot flows via the Bot Transcription Connector. Bot authors can designate a customer-provided ASR engine as the default transcription for an entire bot flow or for individual Ask for Slot actions, improving recognition accuracy for specific languages, accents, and industry domains while maintaining a unified bot design in Architect.
+      </CalloutBox>
+      <CalloutBox type="info">
+        <strong>Custom ASR Dictionaries (March 2026):</strong> Custom dictionaries can now be configured for the Genesys Enhanced V3 speech-to-text engine in bot flows. These dictionaries improve recognition accuracy for organization-specific vocabulary such as product names, industry jargon, medical terms, or proprietary acronyms — reducing misrecognition in specialized domains.
+      </CalloutBox>
       <SubHeading>TTS Voice Options</SubHeading>
       <div className="space-y-2 my-4">
         {VOICE_BOT_DATA.ttsVoices.map((voice, i) => (
@@ -1106,8 +1112,8 @@ const Tier3Content = ({ sectionRefs }) => (
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysBotsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysBotsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1169,6 +1175,16 @@ const GenesysBotsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

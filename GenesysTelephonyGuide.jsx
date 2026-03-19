@@ -378,7 +378,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   TELEPHONY_MODELS.forEach(m => idx.push({ text: `${m.label} ${m.desc}`, label: m.label, sectionId: 't1s3', tier: 0, type: 'Telephony Model' }));
@@ -579,6 +579,9 @@ const Tier1Content = ({ sectionRefs }) => (
           return [node?.label || k, v.explanation, v.analogy];
         })}
       />
+      <CalloutBox type="info">
+        <strong>Standalone phones in group ring.</strong> Administrators can now include standalone phones in groups for group ring. Shared location phones ring alongside user devices during group calls, improving accessibility for teams that rely on shared communication equipment across facilities.
+      </CalloutBox>
     </section>
 
     {/* T1S3 */}
@@ -878,6 +881,9 @@ Restrictive firewalls (UDP blocked): TURN over TCP 443 fallback`}</CodeBlock>
       <CalloutBox type="info">
         <strong>TURN relay is a last resort.</strong> If more than 20% of your agents are using TURN, investigate firewall rules. TURN adds latency and consumes Genesys bandwidth. Opening UDP 3478 and UDP 16384-65535 eliminates the need for TURN in most cases.
       </CalloutBox>
+      <CalloutBox type="info">
+        <strong>Global Media Fabric regional caching.</strong> Genesys Cloud Global Media Fabric now uses regional caching for Architect user prompts, reducing cross-region retrieval time and improving IVR responsiveness for globally distributed deployments. No administrator configuration is required — caching is applied automatically.
+      </CalloutBox>
     </section>
 
     {/* T3S2 */}
@@ -1040,8 +1046,8 @@ GET /api/v2/telephony/siptraces?conversationId={id}
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysTelephonyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysTelephonyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1103,6 +1109,16 @@ const GenesysTelephonyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

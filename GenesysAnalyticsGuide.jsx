@@ -386,7 +386,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   ANALYTICS_USE_CASES.forEach(u => idx.push({ text: `${u.label} ${u.desc}`, label: u.label, sectionId: 't1s1', tier: 0, type: 'Use Case' }));
@@ -757,6 +757,7 @@ const Tier2Content = ({ sectionRefs }) => {
             </div>
           ))}
         </div>
+        <CalloutBox type="info">The Channel Insights dashboard gives supervisors a single cross-channel view of adoption and performance metrics spanning voice, digital messaging, email, and chat. It provides time-based visualizations for volume, resolution rates, sentiment, and virtual agent activity — eliminating the need to switch between separate per-channel dashboards to understand overall contact center performance.</CalloutBox>
       </section>
 
       {/* T2S4 */}
@@ -792,6 +793,8 @@ const Tier2Content = ({ sectionRefs }) => {
           ))}
         </div>
         <CalloutBox type="info">Use the transcript search to find interactions where specific words or phrases were spoken — for example, search for "cancel my account" across all calls in a date range.</CalloutBox>
+        <CalloutBox type="info">Sensitive data masking support has expanded to additional languages. Voice transcripts now support masking for Arabic (ar), Hindi India (hi-IN), Japanese Japan (jp-JP), and Korean Korea (ko-KR). Chat and messaging transcripts add masking for Arabic, Dutch Netherlands, Hindi India, Japanese Japan, and Korean Korea. This prevents PII and PCI data from appearing in transcripts and analytics across a broader set of languages.</CalloutBox>
+        <CalloutBox type="info">Extended Voice Transcription Services (EVTS) has completed its transition to Amazon Transcribe as the sole transcription provider for all supported languages. Previously, EVTS used a dual-provider model with both Microsoft Azure and Amazon Transcribe. All existing analytics behavior is retained across 38 supported languages.</CalloutBox>
       </section>
 
       {/* T2S5 */}
@@ -1129,8 +1132,8 @@ GET /api/v2/analytics/conversations/details/jobs/abc-123/results?cursor=...`}</C
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysAnalyticsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysAnalyticsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1192,6 +1195,16 @@ const GenesysAnalyticsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

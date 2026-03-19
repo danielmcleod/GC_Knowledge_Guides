@@ -302,7 +302,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   JOURNEY_PILLARS.forEach(p => idx.push({ text: `${p.label} ${p.desc}`, label: p.label, sectionId: 't1s1', tier: 0, type: 'Journey Pillar' }));
@@ -481,6 +481,8 @@ const Tier1Content = ({ sectionRefs }) => (
         ))}
       </div>
       <CalloutBox type="tip">Journey Management is not just about chat. While proactive chat is the most common action, the system also supports content offers (visual overlays), webhook actions (external integrations), and predictive scoring that can be consumed by any downstream system.</CalloutBox>
+      <CalloutBox type="info">Survey events, DNIS attributes, and virtual agent filters are now available in Journey Management, enabling richer pattern analysis across customer touchpoints.</CalloutBox>
+      <CalloutBox type="info">A new Copilot panel and expandable charts improve the Journey Management analytics experience, with side-by-side comparisons and AI-assisted insights.</CalloutBox>
     </section>
 
     {/* T1S2 */}
@@ -883,8 +885,8 @@ Genesys("command", "journey.trackCustomEvent", {
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysJourneyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysJourneyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -946,6 +948,16 @@ const GenesysJourneyGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkP
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

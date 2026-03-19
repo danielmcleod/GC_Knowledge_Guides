@@ -328,7 +328,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   DIRECTORY_ASPECTS.forEach(a => idx.push({ text: `${a.label} ${a.desc}`, label: a.label, sectionId: 't1s1', tier: 0, type: 'Directory Aspect' }));
@@ -731,6 +731,7 @@ maria.garcia@acme.com,Maria,Garcia,Support,Agent,jane.smith@acme.com,,New York H
   }
 }`}</CodeBlock>
         <CalloutBox type="tip">Use official groups for queue membership and formal team structures. Use social groups for cross-functional collaboration and interest-based communities. Use dynamic groups to automate membership based on user attributes — especially useful for large organizations where manual management is impractical.</CalloutBox>
+        <CalloutBox type="info">Administrators can now include standalone phones in groups for group ring. When a group call is placed, shared location phones ring alongside individual user devices, improving accessibility for teams that rely on shared communication equipment across facilities. This is especially useful for common-area phones in lobbies, break rooms, or shared workspaces where multiple team members need to answer incoming group calls.</CalloutBox>
       </section>
 
       {/* T2S4 */}
@@ -808,6 +809,7 @@ maria.garcia@acme.com,Maria,Garcia,Support,Agent,jane.smith@acme.com,,New York H
         <SubHeading>Merge & Deduplication</SubHeading>
         <Paragraph>When the same person is created as multiple external contact records (e.g., different phone numbers for the same person), administrators can merge records. The merge process combines all interaction history, notes, and custom data into a single unified record. To prevent duplicates proactively, standardize phone numbers to E.164 format (+1XXXXXXXXXX) and use consistent email addresses.</Paragraph>
         <CalloutBox type="info">External contacts are matched automatically on inbound interactions: phone number for voice calls, email address for emails, and social handle for messaging. Matched contacts appear in the agent's interaction panel with full history and notes. Agents can also create new external contact records during or after an interaction.</CalloutBox>
+        <CalloutBox type="info">A new PATCH API endpoint enables partial updates to external contact records in the Genesys Cloud Customer Profile. Instead of replacing entire contact records with a PUT, integrations and services can now modify specific fields individually — reducing the risk of accidental data overwrites. This is particularly valuable for CRM synchronization and Architect workflows where only a subset of contact fields needs updating at a given time.</CalloutBox>
       </section>
 
       {/* T2S7 */}
@@ -907,8 +909,8 @@ maria.garcia@acme.com,Maria,Garcia,Support,Agent,jane.smith@acme.com,,New York H
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysDirectoryGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysDirectoryGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -970,6 +972,16 @@ const GenesysDirectoryGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

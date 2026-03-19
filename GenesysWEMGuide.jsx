@@ -306,7 +306,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   WEM_PILLARS.forEach(p => idx.push({ text: `${p.label} ${p.desc}`, label: p.label, sectionId: 't1s1', tier: 0, type: 'WEM Pillar' }));
@@ -677,6 +677,9 @@ const Tier2Content = ({ sectionRefs }) => {
             </div>
           ))}
         </div>
+        <CalloutBox type="info">
+          <strong>New metric — Average Alert Time:</strong> This metric measures how long interactions ring before an agent accepts or declines. Supervisors can use it to spot quick responders, identify agents who may need coaching on response times, and make data-driven coaching decisions based on individual response patterns rather than overall queue averages.
+        </CalloutBox>
         <CalloutBox type="tip">Start with 3-5 metrics maximum. Too many metrics dilute the signal — agents cannot optimize for everything at once. Choose the KPIs that most directly impact your business outcomes, weight them appropriately, and communicate the scoring model clearly to agents so they understand what drives their score.</CalloutBox>
       </section>
 
@@ -902,8 +905,8 @@ GET /api/v2/gamification/scorecards/users/{userId}/points/trends
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysWEMGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysWEMGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -965,6 +968,16 @@ const GenesysWEMGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp 
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

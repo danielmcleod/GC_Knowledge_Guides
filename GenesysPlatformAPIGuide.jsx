@@ -362,7 +362,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   DEVELOPER_RESOURCES.forEach(r => idx.push({ text: `${r.label} ${r.desc}`, label: r.label, sectionId: 't1s1', tier: 0, type: 'Developer Resource' }));
@@ -586,6 +586,7 @@ const Tier1Content = ({ sectionRefs }) => (
           </ExpandableCard>
         ))}
       </div>
+      <CalloutBox type="warning"><strong>Implicit Grant Deprecation:</strong> The Token Implicit Grant (Browser) option for OAuth clients is being deprecated. Starting May 2026, new OAuth clients will no longer be able to use the Implicit Grant type. Existing clients that currently rely on Implicit Grant must migrate to Authorization Code with PKCE by May 2027 to continue functioning. This change aligns with OAuth 2.0 security best practices — PKCE provides the same browser-based flow but with significantly stronger protection against token interception and replay attacks. Plan your migration early to avoid disruption.</CalloutBox>
     </section>
 
     {/* T1S4 */}
@@ -965,8 +966,8 @@ console.log(\`Found \${result.totalHits} conversations\`);`}</CodeBlock>
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysPlatformAPIGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysPlatformAPIGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1032,6 +1033,16 @@ const GenesysPlatformAPIGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsD
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

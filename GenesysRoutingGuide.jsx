@@ -436,7 +436,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   CHANNEL_TYPES.forEach(c => idx.push({ text: `${c.label} ${c.desc}`, label: c.label, sectionId: 't1s1', tier: 0, type: 'Channel' }));
@@ -625,6 +625,8 @@ const Tier1Content = ({ sectionRefs }) => (
         ))}
       </div>
       <CalloutBox type="tip">Genesys Cloud treats every channel the same way at the routing level: interactions enter a queue, get evaluated, and are delivered to agents. The only differences are in the media handling (voice requires a phone connection, chat requires a typing interface, etc.).</CalloutBox>
+      <CalloutBox type="info">As of March 2026, secure pause functionality now extends beyond ACD calls to include direct inbound/outbound calls and callbacks to DID numbers in outbound campaigns. Agents can pause recordings when collecting sensitive information like payment details on any call type, supporting PCI and legal compliance requirements across all voice interactions.</CalloutBox>
+      <CalloutBox type="info">As of February 2026, telephony administrators can configure combined voice utilization so that ACD and non-ACD calls count toward a single utilization limit. When enabled, users who are active on ACD calls will not receive non-ACD call alerts after reaching the configured threshold — preventing agent overload when they are already handling calls.</CalloutBox>
     </section>
 
     {/* T1S2 */}
@@ -1044,6 +1046,7 @@ Result: Agent with highest combined score gets the interaction`}</CodeBlock>
         ))}
       </div>
       <CalloutBox type="warning">Predictive Routing may override traditional skill-based routing decisions. The AI selects the agent it predicts will perform best, which might not always be the "most skilled" agent. This is by design — the model considers factors beyond skill proficiency. Monitor A/B test results carefully before full deployment.</CalloutBox>
+      <CalloutBox type="info">As of February 2026, the Queue Details view now displays detailed predictive routing throughput data — including interaction volume and KPI benefits across timeframes for individual queues, plus aggregated summaries. This gives administrators a clearer picture of how predictive routing is performing per queue and helps leaders evaluate whether timeout configurations align with organizational objectives.</CalloutBox>
     </section>
 
     {/* T3S3 */}
@@ -1157,8 +1160,8 @@ v2.analytics.queues.{queueId}.observations        // Real-time queue stats updat
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysRoutingGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysRoutingGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1224,6 +1227,16 @@ const GenesysRoutingGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkP
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

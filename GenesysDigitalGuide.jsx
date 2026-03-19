@@ -378,7 +378,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   DIGITAL_CHANNEL_TYPES.forEach(c => idx.push({ text: `${c.label} ${c.desc}`, label: c.label, sectionId: 't1s1', tier: 0, type: 'Channel' }));
@@ -738,6 +738,10 @@ Genesys("command", "Database.set", {
           </div>
           <CalloutBox type="info">{THIRD_PARTY_CHANNELS[activeChannelTab].notes}</CalloutBox>
         </div>
+        <SubHeading>WhatsApp Channel Enhancements</SubHeading>
+        <CalloutBox type="info">Rich Link Messages — Bot authors can now configure rich link messages for WhatsApp, enabling bots to send interactive call-to-action (CTA) URL button messages. Agents can share text with preview links; when multiple URLs are included, only the first preview is displayed.</CalloutBox>
+        <CalloutBox type="info">List Pickers for Bots — Administrators can enable list pickers for WhatsApp messaging so bots can present customers with predefined choices. Bot authors configure these directly in Architect flows, sending compliant messages within the 24-hour messaging window. This reduces input errors and supports guided customer journeys.</CalloutBox>
+        <CalloutBox type="info">Enhanced Outbound WhatsApp Performance — Genesys Cloud now supports outbound WhatsApp at 18,000 messages per minute for campaigns and 3,000 messages per minute for agentless API messages, enabling reliable delivery for time-sensitive notifications and high-volume outreach.</CalloutBox>
       </section>
 
       {/* T2S4 */}
@@ -779,6 +783,7 @@ Genesys("command", "Database.set", {
 }
 // Your middleware receives this and delivers it to the external platform`}</CodeBlock>
         <CalloutBox type="tip">Open Messaging supports bidirectional media. To send an image, include a "content" array with type "Attachment" and a publicly accessible URL. The customer's external platform must handle rendering.</CalloutBox>
+        <CalloutBox type="warning">Deprecation Notice: The POST /api/v2/conversations/messages/inbound/open endpoint deprecation, originally scheduled for October 31, 2024, has been postponed to October 5, 2026. Genesys will replace this general entry point with three new endpoints designed to enhance open messaging capabilities and performance. Plan to migrate to the new endpoints before the cutoff date.</CalloutBox>
       </section>
 
       {/* T2S5 */}
@@ -1110,8 +1115,8 @@ POST /api/v2/conversations/messages
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysDigitalGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysDigitalGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1173,6 +1178,16 @@ const GenesysDigitalGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkP
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

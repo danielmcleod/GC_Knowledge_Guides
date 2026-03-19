@@ -1,0 +1,3749 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generatedAt": "2026-03-19",
+    "totalGuides": 18,
+    "totalSections": 323,
+    "releaseNotesUrl": "https://help.genesys.cloud/release-notes/genesys-cloud/"
+  },
+  "releaseNoteCategories": [
+    "Customer engagement",
+    "Data, analytics, and reporting",
+    "Employee productivity",
+    "Genesys Cloud",
+    "Open platform",
+    "Self service and automation",
+    "Workforce engagement",
+    "Account management"
+  ],
+  "guides": [
+    {
+      "id": "agentdesktop",
+      "file": "GenesysAgentDesktopGuide.jsx",
+      "title": "Agent Desktop & Scripts",
+      "releaseNoteCategories": [
+        "Employee productivity",
+        "Customer engagement"
+      ],
+      "keywords": [
+        "agent desktop",
+        "agent workspace",
+        "interaction panel",
+        "script designer",
+        "screen pop",
+        "canned response",
+        "quick reply",
+        "agent assist",
+        "agent copilot",
+        "agent UI",
+        "interaction handling",
+        "after call work",
+        "ACW",
+        "wrap-up",
+        "transfer",
+        "consult",
+        "conference",
+        "desktop notification"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is the Agent Desktop?",
+          "keywords": [
+            "agent desktop",
+            "agent workspace",
+            "agent UI"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "interaction panel",
+            "toolbar",
+            "queue panel",
+            "status bar"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Handling Interactions — The Agent Lifecycle",
+          "keywords": [
+            "interaction handling",
+            "alerting",
+            "connected",
+            "ACW",
+            "after call work",
+            "hold",
+            "mute"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Channels on the Desktop",
+          "keywords": [
+            "voice channel",
+            "chat channel",
+            "email channel",
+            "message channel",
+            "callback channel"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — Before Configuring the Desktop",
+          "keywords": [
+            "permissions",
+            "agent role",
+            "phone setup"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Script Designer — Deep Dive",
+          "keywords": [
+            "script designer",
+            "script editor",
+            "script variables",
+            "script actions"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Screen Pops & External URLs",
+          "keywords": [
+            "screen pop",
+            "external URL",
+            "CRM pop",
+            "interaction attributes"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Canned Responses & Quick Replies",
+          "keywords": [
+            "canned response",
+            "quick reply",
+            "substitution",
+            "response library"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Agent Assist & Knowledge Integration",
+          "keywords": [
+            "agent assist",
+            "knowledge suggestion",
+            "next best action",
+            "real-time transcript",
+            "agent copilot",
+            "copilot"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Desktop Configuration & Settings",
+          "keywords": [
+            "utilization",
+            "interaction timeout",
+            "auto answer",
+            "desktop settings"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Supervisor Tools — Monitoring & Coaching",
+          "keywords": [
+            "supervisor",
+            "monitor",
+            "coach",
+            "barge",
+            "whisper"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Transfers, Consults & Conferences",
+          "keywords": [
+            "transfer",
+            "blind transfer",
+            "consult transfer",
+            "conference",
+            "warm transfer"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Agent Desktop Architecture — How It Really Works",
+          "keywords": [
+            "desktop architecture",
+            "client app",
+            "WebSocket"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Advanced Script Designer Patterns",
+          "keywords": [
+            "advanced script",
+            "dynamic script",
+            "script API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Custom Screen Pop Integrations",
+          "keywords": [
+            "custom screen pop",
+            "integration screen pop",
+            "embedded client"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Agent Assist Configuration — AI Features",
+          "keywords": [
+            "agent assist AI",
+            "copilot configuration",
+            "real-time suggestions"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "API & Desktop Extensions",
+          "keywords": [
+            "client app SDK",
+            "desktop API",
+            "embedded framework"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "analytics",
+      "file": "GenesysAnalyticsGuide.jsx",
+      "title": "Analytics & Reporting",
+      "releaseNoteCategories": [
+        "Data, analytics, and reporting"
+      ],
+      "keywords": [
+        "analytics",
+        "reporting",
+        "dashboard",
+        "metrics",
+        "performance view",
+        "data export",
+        "conversation detail",
+        "wallboard",
+        "KPI",
+        "scorecards",
+        "speech analytics",
+        "text analytics",
+        "sentiment"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Analytics in Genesys Cloud?",
+          "keywords": [
+            "analytics",
+            "reporting",
+            "insights"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Analytics Building Blocks",
+          "keywords": [
+            "views",
+            "filters",
+            "columns",
+            "metrics"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Types of Analytics",
+          "keywords": [
+            "real-time analytics",
+            "historical analytics",
+            "predictive analytics"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Key Metrics Every Contact Center Tracks",
+          "keywords": [
+            "service level",
+            "handle time",
+            "abandonment rate",
+            "ASA",
+            "AHT",
+            "occupancy"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — Permissions & Data Visibility",
+          "keywords": [
+            "analytics permissions",
+            "data visibility",
+            "division access"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Performance Views",
+          "keywords": [
+            "performance view",
+            "queue view",
+            "agent view",
+            "interaction view",
+            "flow view"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Dashboards & Widgets",
+          "keywords": [
+            "dashboard",
+            "widget",
+            "custom dashboard"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Conversation Detail & Interaction Search",
+          "keywords": [
+            "conversation detail",
+            "interaction search",
+            "transcript"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Real-Time Dashboards & Wallboards",
+          "keywords": [
+            "real-time dashboard",
+            "wallboard",
+            "live metrics"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Data Export & Scheduled Reports",
+          "keywords": [
+            "data export",
+            "scheduled report",
+            "CSV export",
+            "report scheduling"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Gamification & Agent Scorecards",
+          "keywords": [
+            "gamification",
+            "agent scorecard",
+            "leaderboard"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Key Reports for Supervisors",
+          "keywords": [
+            "supervisor reports",
+            "queue activity",
+            "agent status"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Data Architecture & Retention",
+          "keywords": [
+            "data retention",
+            "data architecture",
+            "analytics storage"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Analytics API",
+          "keywords": [
+            "analytics API",
+            "conversations API",
+            "aggregates API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Custom Dashboards with External Tools",
+          "keywords": [
+            "external BI",
+            "Power BI",
+            "Tableau",
+            "custom reporting"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Analytics Query Language",
+          "keywords": [
+            "analytics query",
+            "query language",
+            "JMESPath"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "Speech & Text Analytics",
+          "keywords": [
+            "speech analytics",
+            "text analytics",
+            "sentiment analysis",
+            "topic detection"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Analytics Issues",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "architect",
+      "file": "GenesysArchitectGuide.jsx",
+      "title": "Architect Flows",
+      "releaseNoteCategories": [
+        "Customer engagement",
+        "Self service and automation"
+      ],
+      "keywords": [
+        "architect",
+        "flow",
+        "IVR",
+        "call flow",
+        "message flow",
+        "bot flow",
+        "in-queue flow",
+        "data action",
+        "expression",
+        "task",
+        "common module",
+        "flow outcome",
+        "secure flow"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Architect?",
+          "keywords": [
+            "architect",
+            "flow builder",
+            "visual scripting"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Concepts",
+          "keywords": [
+            "menus",
+            "tasks",
+            "states",
+            "actions",
+            "variables",
+            "outcomes"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Flow Types Explained Simply",
+          "keywords": [
+            "inbound call flow",
+            "inbound message flow",
+            "in-queue flow",
+            "outbound flow",
+            "secure flow",
+            "bot flow",
+            "email flow",
+            "workflow",
+            "survey flow",
+            "digital bot flow"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "How a Flow Executes — The Lifecycle",
+          "keywords": [
+            "flow execution",
+            "flow lifecycle",
+            "publish flow"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — Before Building Flows",
+          "keywords": [
+            "architect permissions",
+            "flow role"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Inbound Call Flows — Deep Dive",
+          "keywords": [
+            "inbound call flow",
+            "IVR",
+            "menu",
+            "audio prompt",
+            "DTMF"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Data Actions in Flows",
+          "keywords": [
+            "data action",
+            "integration action",
+            "web service",
+            "bridge action"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Expressions & Variables",
+          "keywords": [
+            "expression",
+            "variable",
+            "string operation",
+            "date function",
+            "collection"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Reusable Components — Common Modules & Tasks",
+          "keywords": [
+            "common module",
+            "task",
+            "reusable task"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Bot Flows in Architect",
+          "keywords": [
+            "bot flow",
+            "digital bot flow",
+            "voice bot flow",
+            "NLU"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Secure Call Flows",
+          "keywords": [
+            "secure flow",
+            "secure session",
+            "PCI flow"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Testing & Debugging Flows",
+          "keywords": [
+            "flow debug",
+            "flow trace",
+            "test flow"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Flow Execution Architecture",
+          "keywords": [
+            "flow execution engine",
+            "flow runtime"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Advanced Expression Patterns",
+          "keywords": [
+            "expression pattern",
+            "JSON parsing",
+            "collection manipulation"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Error Handling Patterns",
+          "keywords": [
+            "error handling",
+            "error event",
+            "failure output"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Performance Optimization",
+          "keywords": [
+            "flow optimization",
+            "performance tuning"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "API & Programmatic Management",
+          "keywords": [
+            "flow API",
+            "archy",
+            "flow export",
+            "flow import"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "bots",
+      "file": "GenesysBotsGuide.jsx",
+      "title": "Bots & Conversational AI",
+      "releaseNoteCategories": [
+        "Self service and automation"
+      ],
+      "keywords": [
+        "bot",
+        "conversational AI",
+        "NLU",
+        "natural language",
+        "intent",
+        "slot",
+        "dialog",
+        "dialog engine",
+        "knowledge bot",
+        "voice bot",
+        "chatbot",
+        "bot flow",
+        "utterance",
+        "entity"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Are Bots in Genesys Cloud?",
+          "keywords": [
+            "bot",
+            "conversational AI",
+            "virtual agent",
+            "self-service"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "intent",
+            "utterance",
+            "slot",
+            "entity",
+            "NLU engine",
+            "dialog",
+            "fulfillment"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Bot Types Explained Simply",
+          "keywords": [
+            "digital bot flow",
+            "voice bot flow",
+            "knowledge bot",
+            "bot connector"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "How a Bot Conversation Works — The Lifecycle",
+          "keywords": [
+            "bot conversation",
+            "turn",
+            "escalation",
+            "handoff"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Building Bots",
+          "keywords": [
+            "bot permissions",
+            "NLU license"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Digital Bot Flows in Architect — Deep Dive",
+          "keywords": [
+            "digital bot flow",
+            "bot architect",
+            "bot actions"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Intent Design Best Practices",
+          "keywords": [
+            "intent design",
+            "utterance",
+            "training data",
+            "NLU model"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Knowledge Workbench Integration",
+          "keywords": [
+            "knowledge workbench",
+            "knowledge bot",
+            "FAQ bot",
+            "knowledge integration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Genesys Dialog Engine",
+          "keywords": [
+            "dialog engine",
+            "Genesys dialog engine",
+            "native NLU"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Third-Party Bot Integration",
+          "keywords": [
+            "third-party bot",
+            "Dialogflow",
+            "Amazon Lex",
+            "bot connector"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Agent Handoff & Escalation",
+          "keywords": [
+            "agent handoff",
+            "escalation",
+            "bot transfer"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Testing & Tuning Bots",
+          "keywords": [
+            "bot testing",
+            "NLU testing",
+            "intent analysis",
+            "bot tuning"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "NLU Architecture — How It Really Works",
+          "keywords": [
+            "NLU architecture",
+            "NLU model training",
+            "confidence threshold"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Advanced Dialog Patterns",
+          "keywords": [
+            "advanced dialog",
+            "multi-turn",
+            "context management"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Voice Bot Specifics",
+          "keywords": [
+            "voice bot",
+            "speech recognition",
+            "TTS",
+            "voice synthesis",
+            "ASR"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Intent Mining & Analytics",
+          "keywords": [
+            "intent mining",
+            "bot analytics",
+            "topic analysis"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "API & Programmatic Management",
+          "keywords": [
+            "bot API",
+            "bot integration API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "cxascode",
+      "file": "GenesysCXasCodeGuide.jsx",
+      "title": "CX as Code / DevOps",
+      "releaseNoteCategories": [
+        "Open platform"
+      ],
+      "keywords": [
+        "CX as Code",
+        "terraform",
+        "archy",
+        "CLI",
+        "CI/CD",
+        "DevOps",
+        "infrastructure as code",
+        "configuration management",
+        "terraform provider",
+        "pipeline"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is CX as Code?",
+          "keywords": [
+            "CX as Code",
+            "infrastructure as code",
+            "configuration management"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "terraform provider",
+            "archy CLI",
+            "DevOps tools"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Terraform for Genesys Cloud — Explained Simply",
+          "keywords": [
+            "terraform",
+            "HCL",
+            "terraform plan",
+            "terraform apply",
+            "provider"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Archy CLI — Architect Flow Management",
+          "keywords": [
+            "archy",
+            "flow export",
+            "flow import",
+            "flow CLI"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & Setup",
+          "keywords": [
+            "terraform install",
+            "archy install",
+            "OAuth credentials"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Terraform Provider — Deep Dive",
+          "keywords": [
+            "terraform provider",
+            "resource types",
+            "data sources"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Common Terraform Patterns",
+          "keywords": [
+            "terraform pattern",
+            "modules",
+            "state management",
+            "remote state"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Archy CLI — Deep Dive",
+          "keywords": [
+            "archy CLI",
+            "flow YAML",
+            "flow publish"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "CI/CD Pipeline Design",
+          "keywords": [
+            "CI/CD",
+            "pipeline",
+            "GitHub Actions",
+            "Azure DevOps",
+            "Jenkins"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Environment Management",
+          "keywords": [
+            "environment management",
+            "dev/test/prod",
+            "org migration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Advanced Patterns",
+          "keywords": [
+            "advanced terraform",
+            "custom provider",
+            "drift detection"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Platform Limits, Gotchas & Troubleshooting",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "file": "GenesysDigitalGuide.jsx",
+      "title": "Digital & Omnichannel",
+      "releaseNoteCategories": [
+        "Customer engagement"
+      ],
+      "keywords": [
+        "digital",
+        "omnichannel",
+        "web messaging",
+        "web chat",
+        "SMS",
+        "WhatsApp",
+        "email",
+        "social messaging",
+        "open messaging",
+        "LINE",
+        "Facebook Messenger",
+        "Twitter DM",
+        "Instagram",
+        "rich media",
+        "message channel"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Digital Messaging in Genesys Cloud?",
+          "keywords": [
+            "digital messaging",
+            "omnichannel",
+            "digital channel"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Digital Channels",
+          "keywords": [
+            "web messaging",
+            "SMS",
+            "WhatsApp",
+            "email",
+            "social media",
+            "open messaging"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "How a Digital Interaction Works",
+          "keywords": [
+            "digital interaction",
+            "message routing",
+            "digital flow"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Email vs Messaging — Key Differences",
+          "keywords": [
+            "email vs messaging",
+            "asynchronous",
+            "persistent conversation"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Digital Channels",
+          "keywords": [
+            "messaging deployment",
+            "digital prerequisites"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Web Messaging — Deep Dive",
+          "keywords": [
+            "web messaging",
+            "messenger deployment",
+            "Genesys widget",
+            "web deployment"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Third-Party Messaging Channels",
+          "keywords": [
+            "third-party messaging",
+            "WhatsApp",
+            "SMS",
+            "Facebook",
+            "LINE",
+            "Twitter",
+            "Instagram"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Open Messaging API",
+          "keywords": [
+            "open messaging",
+            "custom channel",
+            "open messaging API"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Email Channel Setup & Routing",
+          "keywords": [
+            "email routing",
+            "email channel",
+            "SMTP",
+            "email domain"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Bot Handoff for Digital Channels",
+          "keywords": [
+            "bot handoff",
+            "digital bot",
+            "bot escalation"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Agent Experience — The Interaction Panel",
+          "keywords": [
+            "agent interaction panel",
+            "digital interaction"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Digital SLA & Queue Management",
+          "keywords": [
+            "digital SLA",
+            "messaging queue",
+            "auto-close"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Digital Channel Architecture — How It Really Works",
+          "keywords": [
+            "digital architecture",
+            "messaging platform",
+            "event bridge"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Advanced Web Messaging",
+          "keywords": [
+            "advanced web messaging",
+            "authenticated messaging",
+            "co-browse"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Email Threading & Advanced Routing",
+          "keywords": [
+            "email threading",
+            "email parsing",
+            "advanced email routing"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Rich Media & Structured Content",
+          "keywords": [
+            "rich media",
+            "structured content",
+            "cards",
+            "quick replies",
+            "carousel"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "API & Programmatic Management",
+          "keywords": [
+            "messaging API",
+            "digital API",
+            "conversation API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "directory",
+      "file": "GenesysDirectoryGuide.jsx",
+      "title": "Directory & People",
+      "releaseNoteCategories": [
+        "Genesys Cloud",
+        "Account management"
+      ],
+      "keywords": [
+        "directory",
+        "user management",
+        "groups",
+        "teams",
+        "locations",
+        "sites",
+        "presence",
+        "status",
+        "SCIM",
+        "external contacts",
+        "profile",
+        "people"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is the Directory in Genesys Cloud?",
+          "keywords": [
+            "directory",
+            "people",
+            "organization"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "users",
+            "groups",
+            "locations",
+            "skills",
+            "languages",
+            "roles"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "How User Management Works — The Lifecycle",
+          "keywords": [
+            "user lifecycle",
+            "onboarding",
+            "offboarding",
+            "provisioning"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Roles, Divisions & Permissions",
+          "keywords": [
+            "roles",
+            "permissions",
+            "divisions"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & Setup",
+          "keywords": [
+            "admin permissions",
+            "directory setup"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "User Management",
+          "keywords": [
+            "user management",
+            "user profile",
+            "bulk import",
+            "user search"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Groups & Teams",
+          "keywords": [
+            "groups",
+            "teams",
+            "work teams",
+            "group membership"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Locations & Sites",
+          "keywords": [
+            "locations",
+            "sites",
+            "site configuration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Presence & Status Definitions",
+          "keywords": [
+            "presence",
+            "status",
+            "on queue",
+            "available",
+            "busy",
+            "away"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "External Contacts & Relationships",
+          "keywords": [
+            "external contacts",
+            "relationships",
+            "contact management"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "SCIM Provisioning & Identity",
+          "keywords": [
+            "SCIM",
+            "provisioning",
+            "identity provider",
+            "directory sync",
+            "Azure AD",
+            "Okta"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "API, Limits & Troubleshooting",
+          "keywords": [
+            "directory API",
+            "user API"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "integrations",
+      "file": "GenesysIntegrationsGuide.jsx",
+      "title": "Integrations & Data Actions",
+      "releaseNoteCategories": [
+        "Open platform"
+      ],
+      "keywords": [
+        "integration",
+        "data action",
+        "OAuth",
+        "AppFoundry",
+        "premium app",
+        "webhook",
+        "AWS Lambda",
+        "Salesforce",
+        "Zendesk",
+        "Microsoft",
+        "CRM",
+        "embedded client"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Are Integrations in Genesys Cloud?",
+          "keywords": [
+            "integration",
+            "integration framework",
+            "marketplace"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "data action",
+            "credential",
+            "configuration",
+            "integration type"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Data Actions Explained Simply",
+          "keywords": [
+            "data action",
+            "input contract",
+            "output contract",
+            "request mapping",
+            "response mapping"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Integration Types Overview",
+          "keywords": [
+            "built-in integration",
+            "premium integration",
+            "custom integration"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & OAuth Configuration",
+          "keywords": [
+            "OAuth client",
+            "credential configuration",
+            "integration setup"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Building Custom Data Actions",
+          "keywords": [
+            "custom data action",
+            "REST action",
+            "web services data action"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Built-In Integrations — CRM & Popular Platforms",
+          "keywords": [
+            "Salesforce",
+            "Zendesk",
+            "Microsoft Teams",
+            "Microsoft Dynamics",
+            "CRM integration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "AWS Lambda & Web Services Integration",
+          "keywords": [
+            "AWS Lambda",
+            "Lambda data action",
+            "web services"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "AppFoundry & Premium Applications",
+          "keywords": [
+            "AppFoundry",
+            "premium app",
+            "marketplace",
+            "partner integration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Architect Integration Patterns",
+          "keywords": [
+            "architect data action",
+            "flow integration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Notification Service & Webhooks",
+          "keywords": [
+            "notification service",
+            "webhook",
+            "event bridge"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Platform Limits, Security & Troubleshooting",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "journey",
+      "file": "GenesysJourneyGuide.jsx",
+      "title": "Journey Management",
+      "releaseNoteCategories": [
+        "Customer engagement"
+      ],
+      "keywords": [
+        "journey",
+        "predictive engagement",
+        "segment",
+        "action map",
+        "outcome",
+        "web tracking",
+        "proactive chat",
+        "proactive offer",
+        "customer journey",
+        "visitor tracking"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Journey Management?",
+          "keywords": [
+            "journey management",
+            "customer journey",
+            "predictive engagement"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "segment",
+            "action map",
+            "outcome",
+            "journey event"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "How Predictive Engagement Works",
+          "keywords": [
+            "predictive engagement",
+            "ML model",
+            "engagement score"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Use Cases — When to Use Journey Management",
+          "keywords": [
+            "proactive chat",
+            "content offer",
+            "web tracking"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & Setup",
+          "keywords": [
+            "journey setup",
+            "JavaScript snippet",
+            "tracking domain"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Segments — Defining Customer Groups",
+          "keywords": [
+            "segment",
+            "customer segment",
+            "segment condition"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Action Maps — Triggering Engagement",
+          "keywords": [
+            "action map",
+            "trigger",
+            "engagement",
+            "proactive offer"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Outcomes — Measuring Success",
+          "keywords": [
+            "outcome",
+            "conversion",
+            "journey outcome"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Predictive Models & AI",
+          "keywords": [
+            "predictive model",
+            "journey AI",
+            "engagement prediction"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Web Event Tracking",
+          "keywords": [
+            "web event",
+            "page view",
+            "click tracking",
+            "form submit"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "API & Integration",
+          "keywords": [
+            "journey API",
+            "event API",
+            "external event"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Platform Limits & Troubleshooting",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "file": "GenesysKnowledgeGuide.jsx",
+      "title": "Knowledge Management",
+      "releaseNoteCategories": [
+        "Self service and automation",
+        "Employee productivity"
+      ],
+      "keywords": [
+        "knowledge",
+        "knowledge base",
+        "knowledge article",
+        "FAQ",
+        "knowledge workbench",
+        "knowledge search",
+        "knowledge panel",
+        "article",
+        "knowledge V2",
+        "knowledge management"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Knowledge Management?",
+          "keywords": [
+            "knowledge management",
+            "knowledge base",
+            "knowledge solution"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "knowledge base",
+            "article",
+            "category",
+            "label"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "How Knowledge Works — Agent & Customer Facing",
+          "keywords": [
+            "agent knowledge",
+            "customer knowledge",
+            "knowledge surface"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "V1 vs V2 Knowledge — Migration Guide",
+          "keywords": [
+            "V1 vs V2",
+            "knowledge migration",
+            "knowledge V2"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & Setup",
+          "keywords": [
+            "knowledge setup",
+            "knowledge permissions"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Creating & Organizing Knowledge Bases",
+          "keywords": [
+            "knowledge base creation",
+            "category structure",
+            "knowledge organization"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Article Authoring Best Practices",
+          "keywords": [
+            "article authoring",
+            "rich text",
+            "article format",
+            "article template"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Search Configuration & Tuning",
+          "keywords": [
+            "search configuration",
+            "search tuning",
+            "relevance",
+            "search boost"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Agent-Facing Knowledge Panel",
+          "keywords": [
+            "agent knowledge panel",
+            "knowledge sidebar",
+            "agent-facing knowledge"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Bot & AI Integration",
+          "keywords": [
+            "knowledge bot",
+            "knowledge FAQ",
+            "bot knowledge integration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "API & Bulk Management",
+          "keywords": [
+            "knowledge API",
+            "bulk import",
+            "article API"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Platform Limits & Troubleshooting",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "outbound",
+      "file": "GenesysOutboundGuide.jsx",
+      "title": "Outbound Dialing",
+      "releaseNoteCategories": [
+        "Customer engagement"
+      ],
+      "keywords": [
+        "outbound",
+        "dialing",
+        "campaign",
+        "contact list",
+        "DNC",
+        "do not contact",
+        "predictive dialing",
+        "preview dialing",
+        "progressive dialing",
+        "power dialing",
+        "agentless",
+        "AMD",
+        "answering machine",
+        "dialer"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Outbound Dialing?",
+          "keywords": [
+            "outbound dialing",
+            "outbound campaign",
+            "dialer"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — What Makes Up a Campaign",
+          "keywords": [
+            "campaign",
+            "contact list",
+            "DNC list",
+            "rule set",
+            "call analysis"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "The Six Dialing Modes — Explained Simply",
+          "keywords": [
+            "preview dialing",
+            "progressive dialing",
+            "predictive dialing",
+            "power dialing",
+            "agentless dialing",
+            "external calling"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "The Life of an Outbound Call — Step by Step",
+          "keywords": [
+            "outbound call",
+            "campaign lifecycle"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Building a Campaign",
+          "keywords": [
+            "outbound prerequisites",
+            "trunk",
+            "edge"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Contact Lists — The Fuel for Your Campaign",
+          "keywords": [
+            "contact list",
+            "contact import",
+            "column mapping",
+            "callable time"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "DNC Lists & Compliance Controls",
+          "keywords": [
+            "DNC",
+            "do not contact",
+            "compliance",
+            "TCPA",
+            "opt-out"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Call Analysis Response Sets",
+          "keywords": [
+            "call analysis",
+            "response set",
+            "answering machine",
+            "live voice",
+            "SIT tone"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Wrap-Up Codes & Mappings",
+          "keywords": [
+            "outbound wrap-up",
+            "wrap-up mapping",
+            "disposition"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Rule Sets — Automating Before and After Every Call",
+          "keywords": [
+            "rule set",
+            "pre-call rule",
+            "post-call rule",
+            "automation rule"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Campaign Sequences & Campaign Rules",
+          "keywords": [
+            "campaign sequence",
+            "campaign rule",
+            "campaign scheduling"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Running & Monitoring a Campaign",
+          "keywords": [
+            "campaign monitoring",
+            "dialing metrics",
+            "campaign dashboard"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Telephony Architecture",
+          "keywords": [
+            "telephony architecture",
+            "outbound edge",
+            "SIP"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "The Predictive Algorithm",
+          "keywords": [
+            "predictive algorithm",
+            "pacing",
+            "abandon rate",
+            "dial ratio"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "AMD — The Three-Layer Detection System",
+          "keywords": [
+            "AMD",
+            "answering machine detection",
+            "CPA",
+            "call progress analysis"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Architect Outbound Flows",
+          "keywords": [
+            "outbound flow",
+            "architect outbound",
+            "campaign flow"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "Scripts & the Set Stage Action",
+          "keywords": [
+            "outbound script",
+            "screen pop",
+            "set stage"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "API & Integration Architecture",
+          "keywords": [
+            "outbound API",
+            "campaign API",
+            "contact list API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s9",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "platformapi",
+      "file": "GenesysPlatformAPIGuide.jsx",
+      "title": "Platform API & SDK",
+      "releaseNoteCategories": [
+        "Open platform"
+      ],
+      "keywords": [
+        "API",
+        "SDK",
+        "REST API",
+        "platform API",
+        "developer",
+        "OAuth",
+        "client library",
+        "notification service",
+        "rate limit",
+        "webhook",
+        "JavaScript SDK",
+        "Python SDK",
+        "Java SDK"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is the Genesys Cloud API?",
+          "keywords": [
+            "API",
+            "platform API",
+            "REST API",
+            "developer tools"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "endpoint",
+            "resource",
+            "authentication",
+            "authorization"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Authentication Explained Simply",
+          "keywords": [
+            "OAuth",
+            "client credentials",
+            "implicit grant",
+            "authorization code",
+            "PKCE"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Making Your First API Call",
+          "keywords": [
+            "API call",
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & OAuth Setup",
+          "keywords": [
+            "OAuth setup",
+            "API credentials",
+            "developer center"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "REST API Patterns",
+          "keywords": [
+            "REST pattern",
+            "pagination",
+            "expand",
+            "search API"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Client Libraries & SDKs",
+          "keywords": [
+            "SDK",
+            "client library",
+            "JavaScript SDK",
+            "Python SDK",
+            "Java SDK",
+            ".NET SDK",
+            "Go SDK"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Notification Service — Real-Time Events",
+          "keywords": [
+            "notification service",
+            "WebSocket",
+            "real-time event",
+            "topic subscription"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Rate Limits & Throttling",
+          "keywords": [
+            "rate limit",
+            "throttling",
+            "429",
+            "retry",
+            "backoff"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Common API Use Cases",
+          "keywords": [
+            "API use case",
+            "bulk operations"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Webhooks & Event-Driven Architecture",
+          "keywords": [
+            "webhook",
+            "event-driven",
+            "event bridge"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Platform Limits, Security & Troubleshooting",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "file": "GenesysQualityGuide.jsx",
+      "title": "Quality Management",
+      "releaseNoteCategories": [
+        "Workforce engagement"
+      ],
+      "keywords": [
+        "quality management",
+        "evaluation",
+        "evaluation form",
+        "calibration",
+        "coaching",
+        "recording",
+        "quality policy",
+        "QM",
+        "speech analytics",
+        "sentiment",
+        "screen recording",
+        "AI scoring"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Quality Management?",
+          "keywords": [
+            "quality management",
+            "QM",
+            "quality assurance"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Quality Lifecycle",
+          "keywords": [
+            "quality lifecycle",
+            "evaluate",
+            "calibrate",
+            "coach"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "The Building Blocks of Quality",
+          "keywords": [
+            "evaluation form",
+            "policy",
+            "calibration",
+            "coaching"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Types of Quality Programs",
+          "keywords": [
+            "quality program",
+            "compliance monitoring",
+            "performance improvement"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Starting",
+          "keywords": [
+            "quality permissions",
+            "evaluator role"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Evaluation Forms — Design & Best Practices",
+          "keywords": [
+            "evaluation form",
+            "form design",
+            "question group",
+            "scoring"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Quality Policies — Automating Evaluation Assignment",
+          "keywords": [
+            "quality policy",
+            "evaluation assignment",
+            "auto-assignment"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Performing Evaluations",
+          "keywords": [
+            "performing evaluation",
+            "scoring",
+            "agent feedback"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Calibration — Ensuring Consistency",
+          "keywords": [
+            "calibration",
+            "evaluator consistency",
+            "inter-rater reliability"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Coaching & Agent Development",
+          "keywords": [
+            "coaching",
+            "coaching appointment",
+            "agent development"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Recording Policies",
+          "keywords": [
+            "recording policy",
+            "screen recording",
+            "call recording",
+            "retention"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Quality Dashboards & Reporting",
+          "keywords": [
+            "quality dashboard",
+            "quality report",
+            "evaluation metrics"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Speech & Text Analytics",
+          "keywords": [
+            "speech analytics",
+            "text analytics",
+            "topic detection",
+            "sentiment analysis"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "AI-Powered Quality",
+          "keywords": [
+            "AI quality",
+            "AI scoring",
+            "automated evaluation",
+            "AI-powered quality"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Advanced Evaluation Design",
+          "keywords": [
+            "advanced evaluation",
+            "weighted scoring",
+            "critical question"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "API & Integration Architecture",
+          "keywords": [
+            "quality API",
+            "evaluation API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "Compliance & Legal Considerations",
+          "keywords": [
+            "compliance",
+            "legal hold",
+            "recording retention",
+            "GDPR recording"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "routing",
+      "file": "GenesysRoutingGuide.jsx",
+      "title": "Inbound Routing & ACD",
+      "releaseNoteCategories": [
+        "Customer engagement"
+      ],
+      "keywords": [
+        "routing",
+        "ACD",
+        "queue",
+        "skills-based routing",
+        "bullseye routing",
+        "preferred agent",
+        "conditional group routing",
+        "predictive routing",
+        "priority",
+        "in-queue flow",
+        "evaluation method"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Inbound Routing?",
+          "keywords": [
+            "inbound routing",
+            "ACD",
+            "automatic call distribution"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "queue",
+            "skill",
+            "language",
+            "agent",
+            "wrap-up code"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "How a Call Gets to an Agent — The Routing Journey",
+          "keywords": [
+            "routing journey",
+            "call routing",
+            "interaction routing"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Routing Methods Explained Simply",
+          "keywords": [
+            "standard routing",
+            "bullseye routing",
+            "preferred agent",
+            "conditional group routing",
+            "predictive routing"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Routing",
+          "keywords": [
+            "routing prerequisites",
+            "telephony setup"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Queues — The Heart of Routing",
+          "keywords": [
+            "queue configuration",
+            "queue member",
+            "queue routing method"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Skills & Languages",
+          "keywords": [
+            "skill",
+            "language",
+            "proficiency",
+            "ACD skill"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Architect Inbound Call Flows",
+          "keywords": [
+            "architect inbound flow",
+            "IVR flow",
+            "call flow"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Schedules & Emergency Routing",
+          "keywords": [
+            "schedule",
+            "schedule group",
+            "emergency routing",
+            "holiday"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Wrap-Up Codes & After-Call Work",
+          "keywords": [
+            "wrap-up code",
+            "after call work",
+            "ACW timeout"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Bullseye Routing — Deep Dive",
+          "keywords": [
+            "bullseye routing",
+            "ring expansion",
+            "skill relaxation"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Monitoring & Real-Time Management",
+          "keywords": [
+            "real-time monitoring",
+            "queue dashboard",
+            "agent status"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Routing Architecture — How It Really Works",
+          "keywords": [
+            "routing architecture",
+            "routing engine",
+            "evaluation algorithm"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Predictive Routing",
+          "keywords": [
+            "predictive routing",
+            "AI routing",
+            "ML routing",
+            "KPI optimization"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Preferred Agent & Direct Routing",
+          "keywords": [
+            "preferred agent",
+            "direct routing",
+            "agent routing"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Advanced Architect Patterns",
+          "keywords": [
+            "advanced architect",
+            "flow pattern",
+            "callback",
+            "voicemail"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "API & Integration",
+          "keywords": [
+            "routing API",
+            "queue API",
+            "skill API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "file": "GenesysSecurityGuide.jsx",
+      "title": "Security & Compliance",
+      "releaseNoteCategories": [
+        "Genesys Cloud",
+        "Account management"
+      ],
+      "keywords": [
+        "security",
+        "compliance",
+        "role",
+        "permission",
+        "division",
+        "OAuth",
+        "SSO",
+        "SAML",
+        "MFA",
+        "encryption",
+        "audit",
+        "PCI",
+        "HIPAA",
+        "GDPR",
+        "data protection",
+        "access control"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "Why Security Matters in a Contact Center",
+          "keywords": [
+            "security",
+            "contact center security",
+            "data protection"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Security Building Blocks",
+          "keywords": [
+            "roles",
+            "permissions",
+            "divisions",
+            "OAuth",
+            "encryption",
+            "audit"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "The Security Layers — Defense in Depth",
+          "keywords": [
+            "defense in depth",
+            "security layers",
+            "network security"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Compliance Frameworks Overview",
+          "keywords": [
+            "PCI",
+            "HIPAA",
+            "GDPR",
+            "SOC 2",
+            "ISO 27001",
+            "compliance framework"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Configuring Security",
+          "keywords": [
+            "security prerequisites",
+            "admin role"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Roles & Permissions — Controlling Who Can Do What",
+          "keywords": [
+            "roles",
+            "permissions",
+            "custom role",
+            "default role",
+            "permission policy"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Divisions — Data Access Control",
+          "keywords": [
+            "divisions",
+            "access control",
+            "data isolation",
+            "division assignment"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Authentication — SSO, OAuth & MFA",
+          "keywords": [
+            "SSO",
+            "SAML",
+            "ADFS",
+            "Okta SSO",
+            "Azure AD SSO",
+            "MFA",
+            "multi-factor"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "SCIM & Directory Sync",
+          "keywords": [
+            "SCIM",
+            "directory sync",
+            "identity provider",
+            "user provisioning"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Encryption & Data Protection",
+          "keywords": [
+            "encryption",
+            "TLS",
+            "at-rest encryption",
+            "key management",
+            "data protection"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Audit Logging & Monitoring",
+          "keywords": [
+            "audit log",
+            "audit trail",
+            "event monitoring",
+            "security logging"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "PCI Compliance — Secure Handling of Payment Data",
+          "keywords": [
+            "PCI compliance",
+            "PCI DSS",
+            "secure IVR",
+            "payment card",
+            "secure flow"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Platform Security Architecture",
+          "keywords": [
+            "platform security",
+            "AWS security",
+            "infrastructure security"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "HIPAA Configuration",
+          "keywords": [
+            "HIPAA",
+            "health data",
+            "BAA",
+            "PHI"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "GDPR & Data Privacy",
+          "keywords": [
+            "GDPR",
+            "data privacy",
+            "data subject",
+            "right to erasure",
+            "data residency"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "API Security",
+          "keywords": [
+            "API security",
+            "OAuth scopes",
+            "token management"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "Edge & Telephony Security",
+          "keywords": [
+            "edge security",
+            "telephony security",
+            "SRTP",
+            "TLS trunk"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — Security Resources",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Security Issues",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "telephony",
+      "file": "GenesysTelephonyGuide.jsx",
+      "title": "Telephony & Edge",
+      "releaseNoteCategories": [
+        "Customer engagement",
+        "Genesys Cloud"
+      ],
+      "keywords": [
+        "telephony",
+        "voice",
+        "BYOC",
+        "cloud voice",
+        "Genesys Cloud Voice",
+        "SIP",
+        "trunk",
+        "edge",
+        "WebRTC",
+        "phone",
+        "softphone",
+        "DID",
+        "number management",
+        "carrier",
+        "media"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Telephony in Genesys Cloud?",
+          "keywords": [
+            "telephony",
+            "voice",
+            "phone system"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "trunk",
+            "phone",
+            "site",
+            "edge",
+            "DID",
+            "toll-free"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "Telephony Models Explained Simply",
+          "keywords": [
+            "cloud voice",
+            "BYOC Cloud",
+            "BYOC Premises",
+            "telephony model"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "How a Voice Call Works — End-to-End",
+          "keywords": [
+            "voice call",
+            "SIP signaling",
+            "media path",
+            "RTP"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites — What You Need Before Telephony",
+          "keywords": [
+            "telephony prerequisites",
+            "network requirements"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Genesys Cloud Voice — Deep Dive",
+          "keywords": [
+            "Genesys Cloud Voice",
+            "GCV",
+            "number purchase",
+            "porting"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "BYOC Cloud Setup",
+          "keywords": [
+            "BYOC Cloud",
+            "cloud trunk",
+            "SIP trunk registration"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "BYOC Premises & Edge Appliances",
+          "keywords": [
+            "BYOC Premises",
+            "edge appliance",
+            "on-premises",
+            "hybrid"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Number Management",
+          "keywords": [
+            "number management",
+            "DID",
+            "toll-free",
+            "number assignment",
+            "E.164"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "WebRTC Phones & Softphones",
+          "keywords": [
+            "WebRTC",
+            "softphone",
+            "browser phone",
+            "persistent connection"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Sites, Locations & Media Settings",
+          "keywords": [
+            "sites",
+            "locations",
+            "media region",
+            "media settings",
+            "codec"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Audio Quality & Troubleshooting",
+          "keywords": [
+            "audio quality",
+            "MOS",
+            "jitter",
+            "packet loss",
+            "QoS"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Telephony Architecture — How It Really Works",
+          "keywords": [
+            "telephony architecture",
+            "media services",
+            "OASYS",
+            "global media"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "SIP Signaling Deep Dive",
+          "keywords": [
+            "SIP signaling",
+            "SIP INVITE",
+            "SIP headers",
+            "SDP"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Edge Appliance Management",
+          "keywords": [
+            "edge management",
+            "edge firmware",
+            "edge pairing",
+            "edge HA"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "Advanced BYOC Patterns",
+          "keywords": [
+            "advanced BYOC",
+            "SBC",
+            "session border controller",
+            "failover"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "API & Programmatic Management",
+          "keywords": [
+            "telephony API",
+            "phone API",
+            "trunk API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Network Requirements & Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "wem",
+      "file": "GenesysWEMGuide.jsx",
+      "title": "Workforce Engagement",
+      "releaseNoteCategories": [
+        "Workforce engagement",
+        "Employee productivity"
+      ],
+      "keywords": [
+        "workforce engagement",
+        "WEM",
+        "gamification",
+        "leaderboard",
+        "performance",
+        "scorecard",
+        "badge",
+        "recognition",
+        "development plan",
+        "agent engagement",
+        "competition"
+      ],
+      "tierCount": 2,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Advanced"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Workforce Engagement Management?",
+          "keywords": [
+            "workforce engagement",
+            "WEM",
+            "employee engagement"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The Building Blocks — Key Components",
+          "keywords": [
+            "gamification",
+            "performance dashboard",
+            "development plan",
+            "recognition"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "How Gamification Works — The Engagement Lifecycle",
+          "keywords": [
+            "gamification",
+            "points",
+            "badges",
+            "levels",
+            "engagement lifecycle"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "WEM vs WFM vs Quality — Where Each Fits",
+          "keywords": [
+            "WEM vs WFM",
+            "WEM vs quality"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & Setup",
+          "keywords": [
+            "WEM setup",
+            "gamification setup"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Gamification Profiles & Metrics",
+          "keywords": [
+            "gamification profile",
+            "gamification metric",
+            "point rules"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Leaderboards & Competitions",
+          "keywords": [
+            "leaderboard",
+            "competition",
+            "team competition"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Performance Dashboards & Scorecards",
+          "keywords": [
+            "performance dashboard",
+            "scorecard",
+            "performance metrics"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Development Plans & Coaching",
+          "keywords": [
+            "development plan",
+            "coaching plan",
+            "agent development"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Recognition & Badges",
+          "keywords": [
+            "recognition",
+            "badge",
+            "achievement",
+            "reward"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "API & Reporting",
+          "keywords": [
+            "WEM API",
+            "gamification API",
+            "performance API"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Platform Limits & Troubleshooting",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "id": "wfm",
+      "file": "GenesysWFMGuide.jsx",
+      "title": "Workforce Management",
+      "releaseNoteCategories": [
+        "Workforce engagement"
+      ],
+      "keywords": [
+        "workforce management",
+        "WFM",
+        "forecast",
+        "schedule",
+        "adherence",
+        "intraday",
+        "time-off",
+        "shift",
+        "work plan",
+        "staffing",
+        "shrinkage",
+        "occupancy"
+      ],
+      "tierCount": 3,
+      "tierNames": [
+        "Foundations",
+        "Configuration & Operations",
+        "Advanced & Technical"
+      ],
+      "sections": [
+        {
+          "tier": 0,
+          "id": "t1s1",
+          "title": "What Is Workforce Management?",
+          "keywords": [
+            "workforce management",
+            "WFM"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s2",
+          "title": "The WFM Lifecycle",
+          "keywords": [
+            "WFM lifecycle",
+            "plan",
+            "forecast",
+            "schedule",
+            "monitor"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s3",
+          "title": "The Building Blocks",
+          "keywords": [
+            "forecast",
+            "schedule",
+            "adherence",
+            "work plan",
+            "management unit"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s4",
+          "title": "Why WFM Matters — The Cost of Getting It Wrong",
+          "keywords": [
+            "understaffing",
+            "overstaffing",
+            "service level impact"
+          ]
+        },
+        {
+          "tier": 0,
+          "id": "t1s5",
+          "title": "Key Terminology Glossary",
+          "keywords": []
+        },
+        {
+          "tier": 1,
+          "id": "t2s1",
+          "title": "Prerequisites & Setup",
+          "keywords": [
+            "WFM setup",
+            "management unit",
+            "business unit"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s2",
+          "title": "Forecasting — Predicting the Future",
+          "keywords": [
+            "forecasting",
+            "forecast method",
+            "historical data",
+            "forecast load"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s3",
+          "title": "Work Plans & Shift Design",
+          "keywords": [
+            "work plan",
+            "shift",
+            "shift pattern",
+            "work plan rotation"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s4",
+          "title": "Scheduling — Building the Plan",
+          "keywords": [
+            "scheduling",
+            "schedule generation",
+            "agent schedule"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s5",
+          "title": "Intraday Management",
+          "keywords": [
+            "intraday management",
+            "intraday monitoring",
+            "reforecasting"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s6",
+          "title": "Adherence Monitoring",
+          "keywords": [
+            "adherence",
+            "real-time adherence",
+            "schedule adherence",
+            "conformance"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s7",
+          "title": "Time-Off Management",
+          "keywords": [
+            "time-off",
+            "time-off request",
+            "PTO",
+            "absence"
+          ]
+        },
+        {
+          "tier": 1,
+          "id": "t2s8",
+          "title": "Reporting & Analytics",
+          "keywords": [
+            "WFM reporting",
+            "WFM analytics",
+            "staffing report"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s1",
+          "title": "Forecasting Algorithms Deep Dive",
+          "keywords": [
+            "forecasting algorithm",
+            "Erlang C",
+            "multi-granularity"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s2",
+          "title": "Schedule Optimization Engine",
+          "keywords": [
+            "schedule optimizer",
+            "constraint optimization"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s3",
+          "title": "Multi-Channel WFM",
+          "keywords": [
+            "multi-channel WFM",
+            "digital WFM",
+            "blended scheduling"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s4",
+          "title": "API & Integration Architecture",
+          "keywords": [
+            "WFM API",
+            "schedule API",
+            "forecast API"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s5",
+          "title": "Advanced Intraday Strategies",
+          "keywords": [
+            "advanced intraday",
+            "automatic scheduling"
+          ]
+        },
+        {
+          "tier": 2,
+          "id": "t3s6",
+          "title": "Platform Limits — The Complete Reference",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s7",
+          "title": "Licensing & Feature Matrix",
+          "keywords": []
+        },
+        {
+          "tier": 2,
+          "id": "t3s8",
+          "title": "Troubleshooting Decision Tree",
+          "keywords": []
+        }
+      ]
+    }
+  ]
+}

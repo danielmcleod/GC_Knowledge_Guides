@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "index:build": "node scripts/build-index.js",
+    "index:scan": "node scripts/scan-updates.js",
+    "index:scan:all": "node scripts/scan-updates.js --all",
+    "index:scan:weeks": "node scripts/scan-updates.js --weeks"
   },
   "dependencies": {
     "lucide-react": "^0.474.0",

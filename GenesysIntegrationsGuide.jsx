@@ -295,7 +295,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   INTEGRATION_CATEGORIES.forEach(a => idx.push({ text: `${a.label} ${a.desc}`, label: a.label, sectionId: 't1s1', tier: 0, type: 'Integration Category' }));
@@ -598,6 +598,9 @@ const Tier2Content = ({ sectionRefs }) => {
             </div>
           ))}
         </div>
+        <CalloutBox type="warning">
+          <strong>Token Implicit Grant (Browser) Deprecation:</strong> The Token Implicit Grant (Browser) option for OAuth clients is being deprecated. Starting May 2026, new OAuth clients will no longer be able to use this grant type. Existing clients that rely on Implicit Grant must migrate to Authorization Code with PKCE by May 2027 to continue functioning. This change aligns with OAuth 2.0 security best practices — PKCE provides stronger protection against authorization code interception attacks. If you're setting up new integrations, use Authorization Code with PKCE from the start.
+        </CalloutBox>
         <SubHeading>Common OAuth Scopes</SubHeading>
         <div className="space-y-2 my-3">
           {OAUTH_SCOPES_COMMON.map(([scope, desc], i) => (
@@ -925,8 +928,8 @@ POST /api/v2/notifications/channels/ch-123/subscriptions
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysIntegrationsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysIntegrationsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -988,6 +991,16 @@ const GenesysIntegrationsGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIs
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);

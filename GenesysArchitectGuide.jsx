@@ -410,7 +410,7 @@ const TROUBLESHOOTING = [
 // ══════════════════════════════════════════════════════════════
 // SEARCH INDEX
 // ══════════════════════════════════════════════════════════════
-const SEARCH_INDEX = (() => {
+export const SEARCH_INDEX = (() => {
   const idx = [];
   SECTIONS.forEach(s => idx.push({ text: s.title, label: s.title, sectionId: s.id, tier: s.tier, type: 'Section' }));
   ARCHITECT_MAP_NODES.forEach(n => {
@@ -852,6 +852,9 @@ Call Data Action: "CRM_Lookup_By_Phone"
         <SubHeading>Bot Flow Architecture</SubHeading>
         <Paragraph>Bot Flows use States instead of Tasks. Each State handles one conversational turn. A typical bot flow has an Initial State (greeting and first question), several intent-handling states (one per customer goal), a confirmation state, and a failure/handoff state. The NLU engine evaluates every customer message against all defined intents and routes to the highest-confidence match.</Paragraph>
         <CalloutBox type="warning">Bot Flows require the Genesys Cloud GC2 or GC3 license. The built-in Genesys Dialog Engine provides NLU capabilities. For third-party NLU (Google Dialogflow, Amazon Lex), GC3 is required.</CalloutBox>
+        <SubHeading>Speech Recognition in Bot Flows</SubHeading>
+        <CalloutBox type="info">Administrators can now bring their own third-party ASR engines into Architect bot flows via the Bot Transcription Connector. They can set a customer-provided ASR engine as the default for an entire bot flow or for individual Ask for Slot actions — great for improving recognition of specific languages, accents, or industry vocabulary.</CalloutBox>
+        <CalloutBox type="info">Administrators can configure custom dictionaries for the Genesys Enhanced V3 speech-to-text engine in bot flows, improving recognition of organization-specific terminology (think product names, medical terms, or industry jargon).</CalloutBox>
       </section>
 
       {/* T2S7 */}
@@ -1059,8 +1062,8 @@ archy export --flowType inboundcall --outputDir ./flows/voice
 // ══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ══════════════════════════════════════════════════════════════
-const GenesysArchitectGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp }) => {
-  const [activeTier, setActiveTier] = useState(0);
+const GenesysArchitectGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDarkProp, initialNav }) => {
+  const [activeTier, setActiveTier] = useState(initialNav?.tier ?? 0);
   const [activeSection, setActiveSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1122,6 +1125,16 @@ const GenesysArchitectGuide = ({ onBack, isDark: isDarkProp, setIsDark: setIsDar
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (initialNav?.sectionId) {
+      const timer = setTimeout(() => {
+        const el = sectionRefs.current[initialNav.sectionId] || document.getElementById(initialNav.sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTierSwitch = (tier) => {
     setActiveTier(tier);
