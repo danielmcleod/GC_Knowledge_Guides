@@ -11,6 +11,7 @@ import {
   Briefcase, FolderOpen, Upload, Download, Grid, List, Tag, ToggleLeft
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -352,7 +353,7 @@ export const SEARCH_INDEX = (() => {
   API_ENDPOINTS.forEach(e => idx.push({ text: `${e.method} ${e.path} ${e.use}`, label: `${e.method} ${e.path}`, sectionId: 't2s8', tier: 1, type: 'API Endpoint' }));
   PLATFORM_LIMITS.forEach(([res, limit, notes]) => idx.push({ text: `${res} ${limit} ${notes}`, label: res, sectionId: 't2s8', tier: 1, type: 'Limit' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't2s8', tier: 1, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.directory || []);
 })();
 
 // ══════════════════════════════════════════════════════════════

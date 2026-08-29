@@ -10,7 +10,8 @@
     "index:build": "node scripts/build-index.js",
     "index:scan": "node scripts/scan-updates.js",
     "index:scan:all": "node scripts/scan-updates.js --all",
-    "index:scan:weeks": "node scripts/scan-updates.js --weeks"
+    "index:scan:weeks": "node scripts/scan-updates.js --weeks",
+    "index:prose": "node scripts/build-prose-index.js"
   },
   "dependencies": {
     "lucide-react": "^0.474.0",

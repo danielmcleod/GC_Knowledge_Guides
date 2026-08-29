@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -368,7 +369,7 @@ export const SEARCH_INDEX = (() => {
   API_ENDPOINTS.forEach(e => idx.push({ text: `${e.method} ${e.path} ${e.use}`, label: `${e.method} ${e.path}`, sectionId: 't3s5', tier: 2, type: 'API Endpoint' }));
   PLATFORM_LIMITS.forEach(([resource, limit]) => idx.push({ text: `${resource} ${limit}`, label: resource, sectionId: 't3s6', tier: 2, type: 'Limit' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s8', tier: 2, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.agentdesktop || []);
 })();
 
 // ══════════════════════════════════════════════════════════════

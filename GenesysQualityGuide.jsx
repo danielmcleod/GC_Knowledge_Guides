@@ -9,6 +9,7 @@ import {
   TrendingUp, Award, Lock, Filter, Headphones, UserCheck, Mic
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -374,7 +375,7 @@ export const SEARCH_INDEX = (() => {
   PLATFORM_LIMITS.forEach(r => idx.push({ text: `${r[0]} ${r[1]} ${r[2]}`, label: r[0], sectionId: 't3s6', tier: 2, type: 'Limit' }));
   LICENSE_MATRIX.forEach(r => idx.push({ text: `${r[0]} GC1:${r[1]} GC2:${r[2]} GC3:${r[3]}`, label: String(r[0]), sectionId: 't3s7', tier: 2, type: 'License Feature' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s8', tier: 2, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.quality || []);
 })();
 
 // ══════════════════════════════════════════════════════════════

@@ -11,6 +11,7 @@ import {
   Package, Send, Repeat, AlertOctagon, Box, Plug
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -383,7 +384,7 @@ export const SEARCH_INDEX = (() => {
   PLATFORM_LIMITS.forEach(([res, limit, notes]) => idx.push({ text: `${res} ${limit} ${notes}`, label: res, sectionId: 't2s8', tier: 1, type: 'Limit' }));
   SECURITY_PRACTICES.forEach(s => idx.push({ text: `${s.title} ${s.desc}`, label: s.title, sectionId: 't2s8', tier: 1, type: 'Security' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't2s8', tier: 1, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.platformapi || []);
 })();
 
 // ══════════════════════════════════════════════════════════════
