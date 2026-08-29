@@ -976,6 +976,14 @@ const Tier3Content = ({ sectionRefs }) => (
       <CalloutBox type="critical">
         <strong>No BAA = No HIPAA compliance.</strong> Without a signed Business Associate Agreement, you cannot legally process PHI through Genesys Cloud. Contact your Genesys account team to initiate the BAA process BEFORE deploying any healthcare-related workloads.
       </CalloutBox>
+      <SubHeading>Configurable Inactivity Timeout</SubHeading>
+      <Paragraph>Administrators in organizations with the HIPAA setting enabled can now modify the inactivity timeout period, setting it shorter or longer to match their workflows.</Paragraph>
+      <Paragraph>The fixed timeout was well-intentioned and, in practice, frequently counterproductive. A clinical triage nurse who steps away mid-call and returns to a logged-out session does not conclude that security is working — they conclude the tool is fighting them, and they start defending themselves against it. Sessions get kept alive artificially. Workstations get left unlocked because logging back in is the painful part. The control produces exactly the exposure it was meant to prevent.</Paragraph>
+      <Paragraph>A configurable period lets you set a timeout people can actually work within, which is usually the one they will not circumvent. In a shared clinical workspace the right answer may still be aggressive; in a private office with badge access and full-disk encryption, a longer timeout backed by real physical controls is often the more defensible position.</Paragraph>
+      <CalloutBox type="critical">
+        <strong>Configurability does not transfer responsibility.</strong> HIPAA compliance remains entirely yours regardless of what you set. Automatic logoff is an addressable implementation specification under the Security Rule — you must document the risk analysis behind your chosen period and be able to justify it to an auditor. "The platform allowed it" is not a justification; a documented assessment of your physical environment and workforce is.
+      </CalloutBox>
+      <CalloutBox type="warning">Lengthening the timeout without compensating controls is a straightforward increase in exposure. If you extend it, be specific about what covers the added risk — enforced workstation locking, physical access restrictions, session monitoring — and record that reasoning alongside the setting. A change with no recorded rationale is the one that is hardest to defend later.</CalloutBox>
     </section>
 
     {/* T3S3 */}

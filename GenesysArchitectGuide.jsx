@@ -768,6 +768,28 @@ Call Data Action: "CRM_Lookup_By_Phone"
     → Set Flow.CustomerName = "Valued Customer"
     → Continue with generic greeting (graceful degradation)`}</CodeBlock>
         <CalloutBox type="warning">Data actions add latency to your flow. Every API call typically adds 200-500ms. A caller sitting in an IVR feels every second. Minimize data action calls, set aggressive timeouts (5-8 seconds instead of default 12), and always handle the failure path gracefully.</CalloutBox>
+        <SubHeading>Branching on HTTP Status Codes</SubHeading>
+        <Paragraph>Voice flows now surface the HTTP response status code and error reason from data actions and secure data actions. Previously the Failure path was a single undifferentiated exit — you knew the call had failed but not why — so every failure got the same handling regardless of cause.</Paragraph>
+        <Paragraph>The distinction that matters most is between "the API answered, and the answer was no" and "the API did not answer." A 404 means this caller genuinely has no CRM record, which is a normal outcome that should route the call onward as a new customer. A 401 or a 503 means your integration is broken, which should not be quietly absorbed into that same path. Treating them identically is how an integration outage goes unnoticed for an entire shift while every caller is greeted as a first-time customer.</Paragraph>
+        <CodeBlock>{`// Failure path with status-code awareness
+Call Data Action: "CRM_Lookup_By_Phone"
+
+  On Failure:
+    Switch on HTTP status code:
+      404  → Flow.CRMFound = false          // legitimate: unknown caller
+             Continue with new-customer greeting
+      401  → Flow.IntegrationDown = true    // credential problem
+      403  → Flow.IntegrationDown = true
+      429  → Flow.IntegrationDown = true    // rate limited — do NOT retry in-flow
+      5xx  → Flow.IntegrationDown = true    // upstream outage
+      Default → Flow.IntegrationDown = true
+
+    IF Flow.IntegrationDown:
+      → Set Flow.CustomerName = "Valued Customer"
+      → Set participant attribute: crmError = <error reason>
+      → Route to fallback queue (do not attempt enrichment again)`}</CodeBlock>
+        <CalloutBox type="tip">Store the status code and error reason in a participant attribute rather than only a flow variable. Flow variables vanish when the flow exits; participant attributes stay with the interaction, so the failure is still visible in the interaction detail view when someone investigates afterwards.</CalloutBox>
+        <CalloutBox type="warning">Do not retry a 429 inside the flow. The caller is holding the line while you back off, and retrying against a rate-limited API mostly adds load to a system already telling you to stop. Skip the enrichment, route the call, and handle the shortfall after the interaction.</CalloutBox>
       </section>
 
       {/* T2S4 */}
@@ -855,6 +877,10 @@ Call Data Action: "CRM_Lookup_By_Phone"
         <SubHeading>Speech Recognition in Bot Flows</SubHeading>
         <CalloutBox type="info">Administrators can now bring their own third-party ASR engines into Architect bot flows via the Bot Transcription Connector. They can set a customer-provided ASR engine as the default for an entire bot flow or for individual Ask for Slot actions — great for improving recognition of specific languages, accents, or industry vocabulary.</CalloutBox>
         <CalloutBox type="info">Administrators can configure custom dictionaries for the Genesys Enhanced V3 speech-to-text engine in bot flows, improving recognition of organization-specific terminology (think product names, medical terms, or industry jargon).</CalloutBox>
+        <SubHeading>Jumping From an Utterance to the Recording</SubHeading>
+        <Paragraph>Bot authors can now navigate directly from an utterance in the Utterance History Viewer to the corresponding point in the call recording, without leaving Architect. Click the utterance, land on the timestamp, hear what actually happened.</Paragraph>
+        <Paragraph>This closes a frustrating gap in voice bot debugging. A transcript shows you the text the ASR produced, which is exactly the wrong artifact when the ASR is the thing you suspect. An utterance logged as "cancel my order" may in the audio have been "cancel my order — sorry, I mean change it," with the tail clipped by an end-of-speech timeout. No amount of intent retraining fixes that; only listening reveals it.</Paragraph>
+        <CalloutBox type="tip">Make this the first step when a voice bot misclassifies something that reads as unambiguous in the transcript. If the text looks obvious but the bot got it wrong, the problem is usually upstream of the NLU — barge-in truncating the caller, background noise, or a prompt the caller talked over — and the recording tells you that in seconds.</CalloutBox>
       </section>
 
       {/* T2S7 */}

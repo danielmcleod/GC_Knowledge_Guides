@@ -616,6 +616,12 @@ const Tier2Content = ({ sectionRefs }) => {
           rows={FORECAST_HORIZONS.map(h => [h.horizon, h.range, h.use, h.accuracy])}
         />
         <CalloutBox type="tip">Always review your forecast before using it for scheduling. Look at the daily totals — do they make sense? Check weekends vs. weekdays. Flag any intervals where the forecast seems unreasonably high or low. A 5-minute review can catch errors that would cascade through the entire schedule.</CalloutBox>
+        <SubHeading>System-Detected Historical Outliers</SubHeading>
+        <Paragraph>Genesys Cloud now detects outliers in the historical data a forecast is built from, and displays both the actual and the normalized value in charts and tables.</Paragraph>
+        <Paragraph>Outliers are the most common reason a technically sound forecast produces a bad schedule. Forecasting works by projecting patterns forward, and it cannot tell the difference between a pattern and an accident. The day your website went down and volume tripled looks, to the model, exactly like evidence that this Tuesday is always busy — so it staffs for a repeat of an event that will not recur.</Paragraph>
+        <Paragraph>Seeing the actual and normalized values side by side is what makes this usable rather than merely automated. The system is not deciding for you; it is showing you what it would use instead and letting you judge. That distinction matters, because the model cannot tell a one-off outage from the first week of a genuine step change in volume — and those two situations call for opposite decisions.</Paragraph>
+        <CalloutBox type="warning">Do not normalize every flagged outlier reflexively. A spike caused by an outage is noise and should be smoothed; a spike caused by a product launch, a new client going live, or a permanent change in call reasons is signal, and normalizing it teaches the forecast to under-staff a volume level that is now your baseline. Check what actually happened on the flagged day before accepting the normalized value.</CalloutBox>
+        <CalloutBox type="tip">Keep a running log of known events — outages, campaigns, launches, weather closures — with dates. Reviewing flagged outliers against that log takes minutes and turns an otherwise guessy judgment into a lookup. Without it, whoever reviews the forecast is reconstructing last quarter's incidents from memory, which is exactly where normalization decisions go wrong.</CalloutBox>
       </section>
 
       {/* T2S3 */}

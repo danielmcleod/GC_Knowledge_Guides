@@ -720,6 +720,11 @@ const Tier2Content = ({ sectionRefs }) => {
             {['Built by you using dashboard widgets', 'Full control over layout and metrics', 'Can combine data from multiple sources', 'Shareable with other users/teams', 'Found under Dashboards menu'].map((item, j) => <div key={j} className="text-xs mb-1" style={{ color: C.t3 }}>- {item}</div>)}
           </div>
         </div>
+        <SubHeading>ACD Skill Expression Performance View</SubHeading>
+        <Paragraph>A performance view for ACD skill expressions, with matching interaction columns, exposes the most recent skill expression applied to an interaction, how many agents currently match it, and how many times the expression changed while the interaction waited in queue.</Paragraph>
+        <Paragraph>This closes a persistent blind spot in wait-time analysis. Queue-level metrics tell you an interaction waited six minutes; they do not tell you what it was waiting for. A queue can look adequately staffed while a specific skill expression has an effective pool of one agent — "twelve agents available" means nothing if only one of them satisfies the combination the interaction actually requires.</Paragraph>
+        <CalloutBox type="tip">When investigating a queue with acceptable average wait but an unacceptable tail, start with the matching-agent count on the slow interactions rather than the queue's staffing figures. Long-tail waits are usually a handful of over-specified expressions with tiny eligible pools, not a general shortage — and the two problems have completely different fixes.</CalloutBox>
+        <CalloutBox type="info">The expression change count reveals how much work bullseye routing is doing. If most interactions are answered only after two or three ring expansions, the initial expression is rarely satisfiable and the routing design is relying on relaxation to function — worth correcting at the source rather than tuning the expansion timers.</CalloutBox>
       </section>
 
       {/* T2S3 */}
@@ -856,6 +861,9 @@ const Tier2Content = ({ sectionRefs }) => {
           ))}
         </div>
         <CalloutBox type="warning">Scheduled exports use relative date ranges. If you schedule a "Yesterday" export for 6:00 AM UTC, it will export the previous day's data. Ensure your timezone expectations align with UTC to avoid one-day-off issues.</CalloutBox>
+        <SubHeading>Journey View Exports for BI Tools</SubHeading>
+        <Paragraph>Journey Management has its own export path: business administrators and analysts can export calculated Journey View data as schema-stable CSV files that preserve journey structure and metrics, intended for Power BI, Tableau, and Looker.</Paragraph>
+        <CalloutBox type="info">The guarantee worth noting is <em>schema-stable</em>. A recurring BI refresh can only be left unattended if the column set does not shift between runs — otherwise every export becomes a maintenance event for whoever owns the downstream model. This is what makes journey data safe to wire into a scheduled dashboard rather than pulling it by hand each month.</CalloutBox>
       </section>
 
       {/* T2S7 */}
@@ -1081,6 +1089,12 @@ GET /api/v2/analytics/conversations/details/jobs/abc-123/results?cursor=...`}</C
         ))}
       </div>
       <CalloutBox type="info">Topic detection runs asynchronously after the conversation ends. Results are typically available within minutes for short calls and up to 24 hours for complex multi-party interactions. Topics are surfaced in the Interaction view, Analytics API, and dashboards.</CalloutBox>
+      <SubHeading>Reprocessing History When Topics Change</SubHeading>
+      <Paragraph>Administrators and analysts can now reprocess historical interactions to update topic information when new topics are created or existing ones are modified — and this can be triggered on demand through the UI, with no API knowledge required.</Paragraph>
+      <Paragraph>This fixes a genuinely awkward property of topic detection. Topics are evaluated as conversations end, so a topic created today has never been applied to anything that happened before today. Define a "Competitor Mentioned" topic in August and the honest answer to "how long has this been happening?" was previously: no idea, ask again in a quarter. The trend you needed existed in the transcripts all along — nothing had ever looked for it.</Paragraph>
+      <Paragraph>Reprocessing applies the current topic definitions backwards, so a newly defined topic gets a history the day you create it. The same applies to refinement: when you add phrases to an existing topic because it was missing obvious variants, reprocessing rebuilds the old results with the better definition instead of leaving a permanent discontinuity in the trend at the moment you edited it.</Paragraph>
+      <CalloutBox type="tip">Reprocess after any material change to a topic's phrases, not only when creating one. Otherwise your own tuning becomes an artifact in the data — volume appears to jump on the day you improved the definition, and nobody looking at the chart six months later can tell that from a real change in customer behavior.</CalloutBox>
+      <CalloutBox type="warning">Reprocessing rewrites topic results on interactions that have already been reported on. If a figure has been circulated externally or used in a compliance report, expect the number to move when the underlying topics are reprocessed. Note when a reprocess ran, so a changed historical figure can be explained rather than treated as an error.</CalloutBox>
     </section>
 
     {/* T3S6 */}

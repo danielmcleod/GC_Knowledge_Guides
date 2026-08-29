@@ -140,6 +140,12 @@ const BOT_TYPES = [
     how: 'Genesys Cloud connects to Google Dialogflow CX/ES or Amazon Lex via built-in integrations. The external bot handles NLU, dialog management, and fulfillment. Genesys manages the communication channel, agent handoff, and routing. Context is passed bidirectionally.',
     note: 'Requires separate Dialogflow or Lex account and API credentials. Latency may increase due to external API calls.',
   },
+  {
+    name: 'Agentic Virtual Agent (AVA)', complexity: 4, best: 'Open-ended, multi-step tasks where the path cannot be drawn in advance — troubleshooting, complex order changes, policy-driven service requests',
+    analogy: 'Hiring an experienced employee instead of writing a script — you describe the goal and the rules, and they work out the steps',
+    how: 'Instead of authoring every dialog branch, you give the agent a set of tools (data actions, knowledge, transfer targets) and instructions describing its goal and boundaries. A Large Action Model (LAM) decides at runtime which tool to call, in what order, and when the task is complete. Authors shape behavior through instructions and post-conditions rather than flow logic.',
+    note: 'Fundamentally different from intent-based bots — you tune behavior by rewriting instructions and constraints, not by adding branches. Non-deterministic by nature, so use post-conditions on tool outputs where an outcome must map to a fixed response.',
+  },
 ];
 
 const BOT_LIFECYCLE = [
@@ -190,6 +196,11 @@ const GLOSSARY = [
   { term: 'Containment Rate', def: 'The percentage of bot interactions that are fully resolved without agent handoff — the key bot success metric', tier: 'Tier 2' },
   { term: 'Bot Connector', def: 'The API framework that enables Genesys Cloud to integrate with external bot platforms beyond Dialogflow/Lex', tier: 'Tier 3' },
   { term: 'Intent Mining', def: 'AI-driven analysis of historical customer conversations to discover new intents the bot should handle', tier: 'Tier 3' },
+  { term: 'Agentic Virtual Agent (AVA)', def: 'A virtual agent that reasons its way to a goal using tools and instructions instead of pre-authored dialog branches. You define what it may do and what "done" looks like; it decides the steps.', tier: 'Tier 1' },
+  { term: 'Large Action Model (LAM)', def: 'The model behind an agentic virtual agent. Where an NLU model classifies what a customer said, a LAM decides what to do next — which tool to invoke and with what arguments.', tier: 'Tier 2' },
+  { term: 'Tool', def: 'A capability exposed to an agentic virtual agent — a data action, knowledge search, or transfer target. The AVA chooses which tools to call and when, rather than being routed to them by flow logic.', tier: 'Tier 2' },
+  { term: 'Post-Condition', def: 'A programmatic rule that maps a specific tool output value to a natural language instruction, forcing a deterministic response for outcomes that must not vary (e.g., "balance is negative → offer a payment plan")', tier: 'Tier 3' },
+  { term: 'Guides V2', def: 'The successor to AI Guides (version 1), which reached end of support on August 31, 2026. Existing v1 implementations must migrate to Guides V2 or to an Agentic Virtual Agent.', tier: 'Tier 2' },
 ];
 
 // ══════════════════════════════════════════════════════════════
@@ -593,6 +604,11 @@ const Tier1Content = ({ sectionRefs }) => (
         ))}
       </div>
       <CalloutBox type="tip">Genesys Cloud bots work across ALL digital channels: web chat (Web Messenger), SMS, Facebook Messenger, WhatsApp, LINE, Twitter DM, and voice. Build once, deploy everywhere — the bot logic is channel-agnostic.</CalloutBox>
+      <SubHeading>The Next Shift — Agentic Virtual Agents</SubHeading>
+      <Paragraph>If moving from IVR menus to intent-based bots was the first shift, agentic virtual agents (AVAs) are the second. An intent-based bot still needs an author to draw every path: recognize this intent, ask for that slot, call this data action, say that sentence. An agentic virtual agent is given a goal, a set of tools it may use, and rules about what it must and must not do — and it works out the sequence itself, at runtime, for each customer.</Paragraph>
+      <Paragraph>The distinction is the difference between handing someone a script and handing someone a job description. A scripted bot handles exactly the situations you anticipated. An agentic agent can combine three tools in an order you never explicitly designed, because the customer's situation called for it. That flexibility is the whole point — and also the reason AVAs need a different kind of tuning, based on instructions and constraints rather than branches.</Paragraph>
+      <CalloutBox type="info">Agentic virtual agents are powered by a Large Action Model (LAM) rather than a classification-only NLU model. Genesys has been building out the surrounding tooling steadily through 2026: public management APIs, dedicated dashboard monitoring, deterministic post-conditions on tool outputs, and spec-driven development with external AI coding agents. These are covered in the deep-dive tiers.</CalloutBox>
+      <CalloutBox type="warning">AI Guides (version 1) reached end of support on August 31, 2026. Organizations still running v1 implementations must migrate to Guides V2 or rebuild the use case as an Agentic Virtual Agent. Plan this migration deliberately — an AVA is not a drop-in replacement, since behavior is expressed as instructions and tools rather than guide steps.</CalloutBox>
     </section>
 
     {/* T1S2 */}
@@ -614,7 +630,7 @@ const Tier1Content = ({ sectionRefs }) => (
     {/* T1S3 */}
     <section ref={el => sectionRefs.current['t1s3'] = el} id="t1s3">
       <SectionHeading>Bot Types Explained Simply</SectionHeading>
-      <Paragraph>Genesys Cloud offers four approaches to building bots, ranging from native (built-in) to fully external (bring your own). The right choice depends on your existing investments, complexity needs, and team expertise.</Paragraph>
+      <Paragraph>Genesys Cloud offers five approaches to building bots, ranging from native (built-in) to fully external (bring your own), and from fully scripted to fully agentic. The right choice depends on your existing investments, complexity needs, and team expertise.</Paragraph>
       <div className="my-6 rounded-lg p-4 overflow-x-auto" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
         <div className="flex items-center justify-between mb-2 min-w-[500px]">
           <span className="text-xs font-bold" style={{ color: C.orange, fontFamily: MONO }}>SIMPLE / NATIVE</span>
@@ -914,6 +930,13 @@ Set Participant Data("Bot_Summary", "Customer checking order ORD-482910, shipped
           ]}
         />
         <CalloutBox type="info">Use the Bot Flow Analytics dashboard in Genesys Cloud to track these metrics. The confusion matrix visualization shows which intents are being confused with each other — this is the single most valuable tool for improving bot accuracy.</CalloutBox>
+        <SubHeading>Tracing an Utterance Back to the Audio</SubHeading>
+        <Paragraph>Transcripts lie by omission. An utterance logged as "I want to cancel" might, in the actual recording, have been "I want to cancel — no wait, not the whole thing" with the second half clipped by an aggressive end-of-speech timeout. From the Utterance History Viewer you can now jump straight from an utterance to the exact timestamp in the call recording inside Architect, so you hear what the caller actually said and how the bot's prompt landed.</Paragraph>
+        <Paragraph>Make this the first step whenever a voice bot misclassifies something that looks obvious in text. More often than not the NLU model is fine and the problem is upstream — background noise, a caller talking over the prompt, or barge-in cutting the utterance in half. No amount of retraining fixes a truncated recording.</Paragraph>
+        <SubHeading>Tuning an Agentic Virtual Agent</SubHeading>
+        <Paragraph>Tuning an AVA does not look like tuning an intent-based bot. There is no confusion matrix to read, because there are no competing intent classes — the model is choosing tools, not labels. Instead you review completed conversations, find the ones where the agent chose the wrong tool or stopped short of the goal, and adjust the instructions or the tool descriptions that misled it. It is closer to coaching a new hire than to retraining a classifier.</Paragraph>
+        <CalloutBox type="tip">Where an outcome must never vary — a compliance disclosure, a refusal, a specific escalation path — do not rely on instructions alone. Define a post-condition on the tool output value so that a given result always maps to the same natural language instruction. Reserve the model's judgment for the parts of the conversation where judgment is actually wanted.</CalloutBox>
+        <CalloutBox type="info">LAM-based agentic virtual agents report into the VA Performance dashboard alongside conventional bots, so containment, escalation, and handling metrics can be compared across both approaches on the same view. This matters when you are deciding whether an AVA has genuinely outperformed the flow it replaced.</CalloutBox>
       </section>
     </div>
   );
@@ -1076,6 +1099,14 @@ const Tier3Content = ({ sectionRefs }) => (
 9. If tests fail → rollback to previous flow version`}</CodeBlock>
       <SubHeading>NLU Model Versioning</SubHeading>
       <Paragraph>Every time you train the NLU model, a new version is created. Previous versions are retained and can be rolled back to. This is critical for production safety — if a new model performs worse, you can instantly revert. Use the versions API endpoint to list, compare, and activate specific model versions.</Paragraph>
+      <SubHeading>Managing Agentic Virtual Agents Programmatically</SubHeading>
+      <Paragraph>Agentic virtual agents are now covered by public APIs supporting the full lifecycle — create, read, update, delete, and publish AVA configurations. This closes the gap that made AVAs awkward to operate at scale: until these endpoints existed, an agent's instructions and tool definitions lived only in the UI, which meant no source control, no code review, and no repeatable promotion between environments.</Paragraph>
+      <Paragraph>With programmatic management the same CI/CD discipline you apply to bot flows applies to AVAs. Keep instructions and tool definitions in Git, review changes to them as you would review code — a one-word change to an instruction can meaningfully change agent behavior — and promote a published version through dev, test, and production rather than editing production directly.</Paragraph>
+      <CalloutBox type="tip">Treat AVA instructions as production code, not configuration. They are the closest thing an agentic agent has to source, and they are unusually sensitive to small edits. A pull request diff on an instruction change is far more informative than an audit log entry after the fact.</CalloutBox>
+      <SubHeading>Spec-Driven Development for AVAs</SubHeading>
+      <Paragraph>Genesys also supports spec-driven development, where you use an external AI coding agent to plan, build, test, and optimize an agentic virtual agent against a written specification. You describe the behavior you want in a spec; the coding agent generates and refines the AVA configuration through the public APIs; you review the result.</Paragraph>
+      <Paragraph>The value here is the same as spec-driven development anywhere else — the specification becomes the reviewable artifact and the source of truth, rather than accumulated UI clicks nobody can reconstruct six months later. Keep the spec in source control alongside the generated configuration, and treat a behavioral change as a spec change first.</Paragraph>
+      <CalloutBox type="warning">Generated configurations still need human review before publishing. An AI coding agent optimizing against a spec will happily satisfy the letter of it — including granting the AVA a broader set of tools than the use case actually requires. Check the tool list and the guardrail instructions on every generated version, not just the behavior it demonstrates in testing.</CalloutBox>
     </section>
 
     {/* T3S6 */}

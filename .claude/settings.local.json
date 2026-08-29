@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm run build:*)",
       "Bash(npm run index:*)",
-      "WebFetch(domain:help.genesys.cloud)"
+      "WebFetch(domain:help.genesys.cloud)",
+      "PowerShell(npm run index:scan)"
     ]
   }
 }
