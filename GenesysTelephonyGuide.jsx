@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin, Wifi, Server, Cloud, HardDrive, Cpu as CpuIcon
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -402,7 +403,7 @@ export const SEARCH_INDEX = (() => {
   LICENSE_MATRIX.forEach(l => idx.push({ text: `${l[0]}`, label: l[0], sectionId: 't3s7', tier: 2, type: 'License Feature' }));
   NETWORK_REQUIREMENTS.forEach(n => idx.push({ text: `${n.category} ${n.items.join(' ')}`, label: n.category, sectionId: 't3s8', tier: 2, type: 'Network Requirement' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't3s8', tier: 2, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.telephony || []);
 })();
 
 // ══════════════════════════════════════════════════════════════

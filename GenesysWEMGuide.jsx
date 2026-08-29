@@ -10,6 +10,7 @@ import {
   Award, Key, Lock, Unlock, MapPin, Trophy, Heart, ThumbsUp, Flag
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -325,7 +326,7 @@ export const SEARCH_INDEX = (() => {
   WEM_API_ENDPOINTS.forEach(a => idx.push({ text: `${a.method} ${a.path} ${a.use}`, label: `${a.method} ${a.path}`, sectionId: 't2s7', tier: 1, type: 'API Endpoint' }));
   PLATFORM_LIMITS.forEach(l => idx.push({ text: `${l[0]} ${l[1]} ${l[2]}`, label: l[0], sectionId: 't2s8', tier: 1, type: 'Limit' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't2s8', tier: 1, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.wem || []);
 })();
 
 // ══════════════════════════════════════════════════════════════

@@ -11,6 +11,7 @@ import {
   Terminal, Server, Plug, ShoppingBag, ToggleLeft, Cpu as CpuIcon
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -320,7 +321,7 @@ export const SEARCH_INDEX = (() => {
   PLATFORM_LIMITS.forEach(([res, limit, notes]) => idx.push({ text: `${res} ${limit} ${notes}`, label: res, sectionId: 't2s8', tier: 1, type: 'Limit' }));
   SECURITY_CHECKLIST.forEach(s => idx.push({ text: s.text, label: s.text.substring(0, 50), sectionId: 't2s8', tier: 1, type: 'Security' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't2s8', tier: 1, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.integrations || []);
 })();
 
 // ══════════════════════════════════════════════════════════════

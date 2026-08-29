@@ -11,6 +11,7 @@ import {
   FolderGit2, Play, Upload, Download, Server, Cog, Box, Repeat
 } from 'lucide-react';
 import Footer from './src/Footer.jsx';
+import { PROSE_INDEX } from './src/prose-index.js';
 
 // ══════════════════════════════════════════════════════════════
 // DESIGN TOKENS
@@ -376,7 +377,7 @@ export const SEARCH_INDEX = (() => {
   ADVANCED_PATTERNS.forEach(p => idx.push({ text: `${p.title} ${p.steps.join(' ')}`, label: p.title, sectionId: 't2s7', tier: 1, type: 'Advanced Pattern' }));
   PLATFORM_LIMITS.forEach(([res, limit, notes]) => idx.push({ text: `${res} ${limit} ${notes}`, label: res, sectionId: 't2s8', tier: 1, type: 'Limit' }));
   TROUBLESHOOTING.forEach(t => idx.push({ text: `${t.symptom} ${t.investigation}`, label: t.symptom, sectionId: 't2s8', tier: 1, type: 'Troubleshooting' }));
-  return idx;
+  return idx.concat(PROSE_INDEX.cxascode || []);
 })();
 
 // ══════════════════════════════════════════════════════════════
