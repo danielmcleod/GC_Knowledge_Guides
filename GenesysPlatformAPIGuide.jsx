@@ -541,6 +541,9 @@ const Tier1Content = ({ sectionRefs }) => (
         ))}
       </div>
       <CalloutBox type="tip">The Genesys Cloud API Explorer (developer.genesys.cloud) lets you browse every endpoint, see request/response schemas, and make live test calls with your OAuth token — all from the browser. It's the fastest way to learn the API.</CalloutBox>
+      <SubHeading>Recent API Additions</SubHeading>
+      <CalloutBox type="info"><strong>Agent State API — adherence and scheduled activity.</strong> Supervisors can now retrieve real-time adherence and scheduled activity data through the Agent State API, alongside the conversation activity it already returned. A single call now answers what an agent is doing <em>and</em> what they were scheduled to be doing — previously two separate sources that a wallboard integration had to fetch independently and correlate itself, usually with subtly different timestamps.</CalloutBox>
+      <CalloutBox type="info"><strong>Agentic virtual agent management.</strong> Public APIs now cover the full lifecycle of agentic virtual agent (AVA) configurations — create, read, update, delete, and publish — bringing AVAs into the same source-controlled, promotable deployment model already used for flows and NLU domains.</CalloutBox>
     </section>
 
     {/* T1S2 */}

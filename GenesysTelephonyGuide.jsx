@@ -563,6 +563,12 @@ const Tier1Content = ({ sectionRefs }) => (
         ))}
       </div>
       <CalloutBox type="tip">Telephony and routing are separate layers. Telephony gets the call TO the platform. Routing decides WHERE within the platform the call goes. You can change your telephony model without changing any routing configuration.</CalloutBox>
+      <SubHeading>Voice Beyond the Contact Center Desk</SubHeading>
+      <Paragraph>Two recent sets of enhancements extend Genesys voice past the traditional seated agent — one toward mobile, one toward embedded CRM telephony.</Paragraph>
+      <CalloutBox type="info"><strong>Associate mobile voice experience.</strong> Administrators can enable a set of improvements for mobile users: seeing the final queue or group handling a call, displaying external contact names, accessing voicemail transcripts, placing outbound calls on behalf of a queue, transferring to queues, and viewing group member responses. Automatic WebRTC station re-association during login improves call delivery reliability.</CalloutBox>
+      <Paragraph>The station re-association detail is the one worth dwelling on, because it addresses a failure that is genuinely hard to diagnose. A user whose station association is stale appears fully logged in and on-queue while calls fail to reach them — there is no error, no alert, just an agent who is available and never receives anything. Re-associating automatically at login removes an entire class of "the phone is broken" tickets that were never really about the phone.</Paragraph>
+      <Paragraph>Placing outbound calls on behalf of a queue is the other change with real operational weight. A callback made from a mobile device that presents the agent's own number invites the customer to call that number back directly, quietly routing future contacts around the contact center entirely. Calling on behalf of the queue keeps the queue's identity on the call, which is what keeps the return path inside your routing.</Paragraph>
+      <CalloutBox type="info"><strong>Multiparty voice in CX Cloud with Salesforce Voice.</strong> Users can privately consult before adding participants, any agent can add conference members, non-Salesforce Voice users can participate, and external conference calls can include Salesforce Voice agents. The practical effect is that consultative transfers work as expected in the embedded experience — the agent can check with a colleague before committing the customer to a transfer, rather than transferring blind and hoping.</CalloutBox>
     </section>
 
     {/* T1S2 */}
@@ -760,6 +766,13 @@ const Tier2Content = ({ sectionRefs }) => (
       <CalloutBox type="warning">
         <strong>Edge Hardware Lifecycle:</strong> Edge appliances require ongoing hardware maintenance, firmware updates, and capacity planning. Budget for hardware refresh every 4-5 years. Virtual Edge (VMware/Hyper-V) reduces hardware dependency but still requires host maintenance.
       </CalloutBox>
+      <SubHeading>End of Life — BYOC Premises Genesys Hardware Solution</SubHeading>
+      <CalloutBox type="critical">
+        <strong>End of life — June 1, 2027:</strong> Genesys will no longer support the BYOC Premises <strong>Genesys Hardware Solution</strong> — the model where Genesys supplies the physical Edge appliance. This is not a soft deprecation with a grace period: existing deployments become <strong>inoperative</strong> on that date. Genesys recommends transitioning to BYOC Cloud, Genesys Cloud Voice, or BYOC Premises <strong>Customer Hardware Solution</strong>.
+      </CalloutBox>
+      <Paragraph>Read the distinction carefully, because it is easy to misread this as "BYOC Premises is going away." It is not. What is ending is the variant where the Edge hardware itself comes from Genesys. BYOC Premises on customer-supplied hardware continues, so if your reason for running on-premises Edges is media locality, survivability, or an existing PBX you cannot retire, that reason still holds — you are changing who owns the box, not your telephony model.</Paragraph>
+      <Paragraph>Choosing a destination comes down to why you were on-premises in the first place. If it was genuinely about survivability and local media, move to Customer Hardware Solution and keep the architecture you have. If the on-prem Edge was really only there because of a carrier contract or a PBX you have since retired, this is the moment to reconsider — BYOC Cloud keeps your carrier relationship while removing the appliance entirely, and Genesys Cloud Voice removes both.</Paragraph>
+      <CalloutBox type="warning">Hardware procurement and telephony cutovers are slow, and this deadline is a hard stop rather than a degradation. Work backwards from June 1, 2027, and leave room for carrier coordination and a per-site rollout — number porting and SIP trunk changes involve third parties who set their own timelines, and a site that misses the date has no working telephony rather than a degraded service.</CalloutBox>
     </section>
 
     {/* T2S5 */}

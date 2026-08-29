@@ -483,6 +483,10 @@ const Tier1Content = ({ sectionRefs }) => (
       <CalloutBox type="tip">Journey Management is not just about chat. While proactive chat is the most common action, the system also supports content offers (visual overlays), webhook actions (external integrations), and predictive scoring that can be consumed by any downstream system.</CalloutBox>
       <CalloutBox type="info">Survey events, DNIS attributes, and virtual agent filters are now available in Journey Management, enabling richer pattern analysis across customer touchpoints.</CalloutBox>
       <CalloutBox type="info">A new Copilot panel and expandable charts improve the Journey Management analytics experience, with side-by-side comparisons and AI-assisted insights.</CalloutBox>
+      <SubHeading>Getting Journey Data Into Your BI Stack</SubHeading>
+      <Paragraph>Business administrators and analysts can export calculated Journey View data as schema-stable CSV files for use in Power BI, Tableau, or Looker. The exports preserve journey structure and metrics rather than flattening them into an undifferentiated event list.</Paragraph>
+      <Paragraph>The phrase doing the work here is <em>schema-stable</em>. An export whose columns shift between runs cannot be the source of a scheduled dashboard — every change breaks the downstream model and someone has to repair it by hand. A stable schema is what makes it safe to point a recurring BI refresh at this data and leave it running.</Paragraph>
+      <CalloutBox type="tip">This is the natural bridge when journey metrics need to sit alongside data Genesys does not hold — revenue from your billing system, fulfillment outcomes from your warehouse. Analyze inside Journey Management while the question is about journeys; export when the question spans systems and the join has to happen elsewhere.</CalloutBox>
     </section>
 
     {/* T1S2 */}
@@ -530,6 +534,14 @@ const Tier1Content = ({ sectionRefs }) => (
           <div className="font-bold text-sm" style={{ color: C.green, fontFamily: MONO }}>LOOP — MODEL LEARNS & IMPROVES WITH EVERY OUTCOME</div>
         </div>
       </div>
+      <SubHeading>How Visitors Are Tracked — And the SDK v1 Deprecation</SubHeading>
+      <Paragraph>Everything above depends on the first step: recognizing a visitor and recording what they do. Historically that was the job of the GPE tracking snippet you pasted into your site, which loaded the Predictive Engagement Tracking SDK.</Paragraph>
+      <CalloutBox type="warning">
+        <strong>Deprecated — GPE Tracking SDK v1:</strong> Genesys Cloud has deprecated Tracking SDK v1, the version delivered through the legacy GPE tracking snippet. Customers should migrate to <strong>Messenger</strong> and use digital user tracking to stay on a supported path. If your site still loads the legacy snippet, that is the thing to replace.
+      </CalloutBox>
+      <Paragraph>The consolidation behind this is worth understanding. GPE originally shipped its own tracking layer, separate from the Messenger deployment that powered web chat — so a site running both carried two Genesys scripts collecting overlapping data about the same visitor. Digital user tracking through Messenger folds those into one, which means a single script, one identity for the visitor, and no reconciliation between two views of the same session.</Paragraph>
+      <CalloutBox type="tip">Audit before you cut over. Check which pages actually carry the legacy snippet — in practice it is rarely all of them, and long-lived sites accumulate copies in templates nobody has opened in years. A page that silently stops tracking does not raise an error; it just quietly stops feeding segments, and your engagement rates drift down for reasons that look like model decay.</CalloutBox>
+      <CalloutBox type="info">Related: Genesys ended support for <strong>Pointillist</strong> on July 31, 2026. Customers on Pointillist should transition to the unified Journey Management offering in Genesys Cloud CX described throughout this guide.</CalloutBox>
     </section>
 
     {/* T1S4 */}

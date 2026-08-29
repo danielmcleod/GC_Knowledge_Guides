@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "generatedAt": "2026-03-19",
+    "generatedAt": "2026-08-29",
     "totalGuides": 18,
     "totalSections": 323,
     "releaseNotesUrl": "https://help.genesys.cloud/release-notes/genesys-cloud/"
@@ -43,7 +43,13 @@
         "transfer",
         "consult",
         "conference",
-        "desktop notification"
+        "desktop notification",
+        "case",
+        "case management",
+        "AI Studio",
+        "concurrent applications",
+        "screen monitoring",
+        "third-party application"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -158,7 +164,12 @@
             "next best action",
             "real-time transcript",
             "agent copilot",
-            "copilot"
+            "copilot",
+            "AI Studio",
+            "copilot configuration",
+            "third-party application",
+            "answer generation",
+            "summary generation"
           ]
         },
         {
@@ -169,7 +180,10 @@
             "utilization",
             "interaction timeout",
             "auto answer",
-            "desktop settings"
+            "desktop settings",
+            "concurrent applications",
+            "multiple applications",
+            "WebRTC priority"
           ]
         },
         {
@@ -181,7 +195,12 @@
             "monitor",
             "coach",
             "barge",
-            "whisper"
+            "whisper",
+            "case management",
+            "case details",
+            "case",
+            "screen monitoring",
+            "live screen monitoring"
           ]
         },
         {
@@ -286,7 +305,11 @@
         "scorecards",
         "speech analytics",
         "text analytics",
-        "sentiment"
+        "sentiment",
+        "reprocess",
+        "reprocessing",
+        "topic reprocessing",
+        "skill expression"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -364,7 +387,9 @@
             "queue view",
             "agent view",
             "interaction view",
-            "flow view"
+            "flow view",
+            "skill expression",
+            "matching agents"
           ]
         },
         {
@@ -477,7 +502,11 @@
             "speech analytics",
             "text analytics",
             "sentiment analysis",
-            "topic detection"
+            "topic detection",
+            "reprocess",
+            "reprocessing",
+            "topic reprocessing",
+            "historical interactions"
           ]
         },
         {
@@ -761,7 +790,17 @@
         "chatbot",
         "bot flow",
         "utterance",
-        "entity"
+        "entity",
+        "agentic",
+        "agentic virtual agent",
+        "AVA",
+        "virtual agent",
+        "large action model",
+        "LAM",
+        "AI guides",
+        "guides V2",
+        "AI Studio",
+        "spec-driven"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -778,7 +817,13 @@
             "bot",
             "conversational AI",
             "virtual agent",
-            "self-service"
+            "self-service",
+            "agentic virtual agent",
+            "AVA",
+            "large action model",
+            "LAM",
+            "AI guides",
+            "guides V2"
           ]
         },
         {
@@ -803,7 +848,10 @@
             "digital bot flow",
             "voice bot flow",
             "knowledge bot",
-            "bot connector"
+            "bot connector",
+            "agentic virtual agent",
+            "AVA",
+            "agentic"
           ]
         },
         {
@@ -903,7 +951,13 @@
             "bot testing",
             "NLU testing",
             "intent analysis",
-            "bot tuning"
+            "bot tuning",
+            "utterance history",
+            "utterance timestamp",
+            "post-condition",
+            "deterministic conditioning",
+            "tool output",
+            "VA performance dashboard"
           ]
         },
         {
@@ -945,7 +999,9 @@
           "keywords": [
             "intent mining",
             "bot analytics",
-            "topic analysis"
+            "topic analysis",
+            "VA performance dashboard",
+            "virtual agent performance"
           ]
         },
         {
@@ -954,7 +1010,11 @@
           "title": "API & Programmatic Management",
           "keywords": [
             "bot API",
-            "bot integration API"
+            "bot integration API",
+            "agentic virtual agent API",
+            "AVA API",
+            "spec-driven development",
+            "virtual agent management"
           ]
         },
         {
@@ -1154,7 +1214,16 @@
         "Twitter DM",
         "Instagram",
         "rich media",
-        "message channel"
+        "message channel",
+        "sender ID",
+        "alphanumeric sender",
+        "Mobile Messenger",
+        "social listening",
+        "opt-out",
+        "web survey",
+        "follower count",
+        "verified status",
+        "Google Business Profile"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -1229,7 +1298,10 @@
             "web messaging",
             "messenger deployment",
             "Genesys widget",
-            "web deployment"
+            "web deployment",
+            "Mobile Messenger",
+            "participant name",
+            "avatar"
           ]
         },
         {
@@ -1243,7 +1315,15 @@
             "Facebook",
             "LINE",
             "Twitter",
-            "Instagram"
+            "Instagram",
+            "opt-out",
+            "opt out",
+            "sender ID",
+            "alphanumeric sender",
+            "social listening",
+            "follower count",
+            "verified status",
+            "Google Business Profile"
           ]
         },
         {
@@ -1283,7 +1363,9 @@
           "title": "Agent Experience — The Interaction Panel",
           "keywords": [
             "agent interaction panel",
-            "digital interaction"
+            "digital interaction",
+            "web survey",
+            "survey invitation"
           ]
         },
         {
@@ -1388,7 +1470,9 @@
         "SCIM",
         "external contacts",
         "profile",
-        "people"
+        "people",
+        "external contacts export",
+        "contact export"
       ],
       "tierCount": 2,
       "tierNames": [
@@ -1507,7 +1591,11 @@
           "keywords": [
             "external contacts",
             "relationships",
-            "contact management"
+            "contact management",
+            "external contacts export",
+            "contact export",
+            "lifecycle timestamps",
+            "external identifiers"
           ]
         },
         {
@@ -1553,7 +1641,14 @@
         "Zendesk",
         "Microsoft",
         "CRM",
-        "embedded client"
+        "embedded client",
+        "Cloud Run",
+        "Google Cloud Run",
+        "login hint",
+        "client credential flow",
+        "ServiceNow incident",
+        "HR case",
+        "workitem"
       ],
       "tierCount": 2,
       "tierNames": [
@@ -1617,7 +1712,9 @@
           "keywords": [
             "OAuth client",
             "credential configuration",
-            "integration setup"
+            "integration setup",
+            "login hint",
+            "authorization URL"
           ]
         },
         {
@@ -1639,7 +1736,11 @@
             "Zendesk",
             "Microsoft Teams",
             "Microsoft Dynamics",
-            "CRM integration"
+            "CRM integration",
+            "client credential flow",
+            "Salesforce credentials",
+            "ServiceNow incident",
+            "HR case"
           ]
         },
         {
@@ -1707,7 +1808,13 @@
         "proactive chat",
         "proactive offer",
         "customer journey",
-        "visitor tracking"
+        "visitor tracking",
+        "Pointillist",
+        "tracking SDK",
+        "GPE",
+        "digital user tracking",
+        "journey view",
+        "journey export"
       ],
       "tierCount": 2,
       "tierNames": [
@@ -1722,7 +1829,11 @@
           "keywords": [
             "journey management",
             "customer journey",
-            "predictive engagement"
+            "predictive engagement",
+            "journey export",
+            "journey view",
+            "BI export",
+            "Pointillist"
           ]
         },
         {
@@ -1743,7 +1854,11 @@
           "keywords": [
             "predictive engagement",
             "ML model",
-            "engagement score"
+            "engagement score",
+            "tracking SDK",
+            "GPE",
+            "tracking snippet",
+            "digital user tracking"
           ]
         },
         {
@@ -1769,7 +1884,10 @@
           "keywords": [
             "journey setup",
             "JavaScript snippet",
-            "tracking domain"
+            "tracking domain",
+            "tracking SDK",
+            "tracking snippet",
+            "Messenger tracking"
           ]
         },
         {
@@ -2015,7 +2133,10 @@
         "agentless",
         "AMD",
         "answering machine",
-        "dialer"
+        "dialer",
+        "contact list retention",
+        "record retention",
+        "agentless notification"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -2056,7 +2177,10 @@
             "predictive dialing",
             "power dialing",
             "agentless dialing",
-            "external calling"
+            "external calling",
+            "agentless notification",
+            "agentless messaging",
+            "proactive notification"
           ]
         },
         {
@@ -2092,7 +2216,10 @@
             "contact list",
             "contact import",
             "column mapping",
-            "callable time"
+            "callable time",
+            "contact list retention",
+            "record retention",
+            "retention period"
           ]
         },
         {
@@ -2427,7 +2554,9 @@
         "speech analytics",
         "sentiment",
         "screen recording",
-        "AI scoring"
+        "AI scoring",
+        "screen recording playback",
+        "playback speed"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -2552,7 +2681,11 @@
             "recording policy",
             "screen recording",
             "call recording",
-            "retention"
+            "retention",
+            "screen recording playback",
+            "playback speed",
+            "zoom",
+            "pan"
           ]
         },
         {
@@ -2655,7 +2788,10 @@
         "predictive routing",
         "priority",
         "in-queue flow",
-        "evaluation method"
+        "evaluation method",
+        "skill expression",
+        "skill division",
+        "divisioned skills"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -2741,7 +2877,11 @@
             "skill",
             "language",
             "proficiency",
-            "ACD skill"
+            "ACD skill",
+            "skill expression",
+            "skill division",
+            "divisions to ACD skills",
+            "matching agents"
           ]
         },
         {
@@ -2891,7 +3031,11 @@
         "HIPAA",
         "GDPR",
         "data protection",
-        "access control"
+        "access control",
+        "universal logout",
+        "inactivity timeout",
+        "session timeout",
+        "linked clients"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -2995,7 +3139,10 @@
             "Okta SSO",
             "Azure AD SSO",
             "MFA",
-            "multi-factor"
+            "multi-factor",
+            "universal logout",
+            "linked clients",
+            "logout"
           ]
         },
         {
@@ -3062,7 +3209,10 @@
             "HIPAA",
             "health data",
             "BAA",
-            "PHI"
+            "PHI",
+            "inactivity timeout",
+            "session timeout",
+            "automatic logoff"
           ]
         },
         {
@@ -3141,7 +3291,12 @@
         "DID",
         "number management",
         "carrier",
-        "media"
+        "media",
+        "Genesys Hardware Solution",
+        "mobile voice",
+        "Salesforce Voice",
+        "multiparty",
+        "station re-association"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -3157,7 +3312,11 @@
           "keywords": [
             "telephony",
             "voice",
-            "phone system"
+            "phone system",
+            "mobile voice",
+            "Salesforce Voice",
+            "multiparty",
+            "station re-association"
           ]
         },
         {
@@ -3239,7 +3398,10 @@
             "BYOC Premises",
             "edge appliance",
             "on-premises",
-            "hybrid"
+            "hybrid",
+            "Genesys Hardware Solution",
+            "customer hardware solution",
+            "hardware end of life"
           ]
         },
         {
@@ -3382,7 +3544,10 @@
         "recognition",
         "development plan",
         "agent engagement",
-        "competition"
+        "competition",
+        "opportunities",
+        "enrollments",
+        "time-based filtering"
       ],
       "tierCount": 2,
       "tierNames": [
@@ -3535,7 +3700,11 @@
         "work plan",
         "staffing",
         "shrinkage",
-        "occupancy"
+        "occupancy",
+        "activity code",
+        "decision metrics",
+        "forecast outlier",
+        "outlier"
       ],
       "tierCount": 3,
       "tierNames": [
@@ -3611,7 +3780,10 @@
             "forecasting",
             "forecast method",
             "historical data",
-            "forecast load"
+            "forecast load",
+            "forecast outlier",
+            "outlier",
+            "normalized value"
           ]
         },
         {
@@ -3632,7 +3804,9 @@
           "keywords": [
             "scheduling",
             "schedule generation",
-            "agent schedule"
+            "agent schedule",
+            "activity code",
+            "activity code color"
           ]
         },
         {

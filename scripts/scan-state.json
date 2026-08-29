@@ -1,5 +1,5 @@
 {
-  "lastScanDate": "2026-03-19",
+  "lastScanDate": "2026-08-29",
   "scanHistory": [
     {
       "date": "2026-03-19",
@@ -49,6 +49,19 @@
       "itemsScanned": 66,
       "itemsMatched": 42,
       "reportFile": "reports/update-plan-2026-03-19.md"
+    },
+    {
+      "date": "2026-08-29",
+      "releaseNotesCovered": [
+        "August 24, 2026",
+        "August 17, 2026",
+        "August 10, 2026",
+        "August 3, 2026",
+        "July 27, 2026"
+      ],
+      "itemsScanned": 65,
+      "itemsMatched": 41,
+      "reportFile": "reports/update-plan-2026-08-29.md"
     }
   ]
 }

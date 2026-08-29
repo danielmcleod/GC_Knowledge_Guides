@@ -122,6 +122,10 @@ const INTEGRATION_TYPES = [
     how: 'Architect flows invoke Lambda functions directly via the Genesys Cloud AWS integration. Lambda receives a JSON payload, executes your code (Node.js, Python, Java, etc.), and returns a JSON response. No API Gateway needed — Genesys invokes Lambda via AWS SDK.',
   },
   {
+    name: 'Google Cloud Run Functions (v2) Data Actions', complexity: 4, best: 'The same serverless pattern as Lambda, for organizations standardized on Google Cloud',
+    how: 'Configure a Google Cloud Run Functions (v2) integration and invoke your functions from data actions using Google service account credentials. Genesys authenticates to the function directly, so you do not need to expose it publicly or front it with an API gateway just to make it reachable.',
+  },
+  {
     name: 'Custom Webhooks & Notifications', complexity: 3, best: 'Real-time event-driven architectures, external alerting, audit logging',
     how: 'Subscribe to Genesys Cloud notification topics and receive HTTP POST callbacks at your endpoint whenever events occur. Supports conversation events, presence changes, routing events, and more.',
   },
@@ -180,7 +184,7 @@ const OAUTH_SCOPES_COMMON = [
 ];
 
 const DATA_ACTION_STEPS = [
-  { title: 'Create Integration', detail: 'Go to Admin > Integrations > Add Integration. Select "Web Services Data Actions" for custom REST APIs, or a specific integration type (Salesforce, AWS Lambda, etc.). Name it and set credentials.' },
+  { title: 'Create Integration', detail: 'Go to Admin > Integrations > Add Integration. Select "Web Services Data Actions" for custom REST APIs, or a specific integration type (Salesforce, AWS Lambda, Google Cloud Run Functions (v2), etc.). Name it and set credentials.' },
   { title: 'Define Input Contract', detail: 'Specify the JSON schema for input parameters. Each field has a name, type (STRING, INTEGER, BOOLEAN, NUMBER), and required flag. These become the variables you map in Architect flows.' },
   { title: 'Define Output Contract', detail: 'Specify the JSON schema for output fields. These are the values the flow will receive after the action executes. Keep outputs minimal — only include fields the flow actually needs.' },
   { title: 'Configure Request Template', detail: 'Build the HTTP request: method (GET/POST/PUT/PATCH/DELETE), URL with path parameters, headers (Content-Type, Authorization), query parameters, and request body. Use ${input.fieldName} for variable substitution.' },
@@ -631,6 +635,10 @@ Authorization: Bearer eyJhbG...`}</CodeBlock>
         <CalloutBox type="warning">
           <strong>Security best practice:</strong> Never hardcode OAuth client secrets in source code. Use environment variables or a secrets manager. Rotate secrets every 90 days. Use the minimum required scopes for each integration.
         </CalloutBox>
+        <SubHeading>Login Hints — Smoothing the Authorization Redirect</SubHeading>
+        <Paragraph>Client applications can now include the organization name and the user's login email address as parameters in the Genesys Cloud authorization URL. Instead of landing on a blank login page and typing both values, the user arrives with the org and email already filled in and only needs to enter a password.</Paragraph>
+        <Paragraph>This is small but it removes a genuine source of friction. In multi-org environments the org name is the field users most often get wrong, and every mistyped org name is a failed login that looks, to the user, like the integration is broken. If your application already knows which org and which user it is authorizing — and an embedded or CRM-launched app almost always does — pass it along.</Paragraph>
+        <CalloutBox type="info">A login hint is a convenience, not a security control. It pre-populates fields in the login form; it does not authenticate anyone or bypass any step. The user still authenticates in full, and your application must still validate the returned token rather than trusting the identity it suggested.</CalloutBox>
       </section>
 
       {/* T2S2 */}
@@ -718,6 +726,12 @@ Authorization: Bearer eyJhbG...`}</CodeBlock>
           ))}
         </div>
         <CalloutBox type="info">CRM integrations typically require both an OAuth client in Genesys Cloud AND corresponding API credentials in the CRM platform. The Genesys Cloud integration admin page guides you through the bi-directional setup process.</CalloutBox>
+        <SubHeading>Salesforce Credentials — Migrate Off Username and Password</SubHeading>
+        <CalloutBox type="warning">
+          <strong>Deprecation — October 7, 2026:</strong> The legacy Salesforce data action credential type based on username and password is being deprecated. Migrate affected data actions to <strong>Salesforce (OAuth Client Credential Flow)</strong>, which uses the OAuth 2.0 Client Credentials Flow, before that date. Data actions still holding the old credential type will stop authenticating when support ends, and because data actions fail at runtime rather than at publish time, the symptom will be live flows taking their Failure path in production.
+        </CalloutBox>
+        <Paragraph>This is worth doing early rather than on the deadline. Username-and-password credentials are a genuinely poor fit for a machine integration: they carry a human's full permission set, they break whenever that person's password rotates or their account is disabled, and they cannot be scoped down. Client Credentials Flow replaces them with a connected app that authenticates as itself, with its own permissions and its own lifecycle.</Paragraph>
+        <Paragraph>Practically, the migration means creating a connected app in Salesforce configured for the Client Credentials Flow, assigning it a dedicated integration user with only the object permissions your data actions actually touch, then updating the Genesys Cloud credential on the Salesforce integration. Inventory first — search your data actions for the Salesforce integration and list every one that uses the old credential, since a single missed action is enough to break a routing path.</Paragraph>
       </section>
 
       {/* T2S4 */}
@@ -839,6 +853,24 @@ exports.handler = async (event) => {
             </div>
           ))}
         </div>
+        <SubHeading>Reading HTTP Status Codes in Voice Flows</SubHeading>
+        <Paragraph>Historically, a failed data action in an Architect voice flow told you very little. The action took its Failure path and that was that — you knew something went wrong, but not whether the API had returned 401, 404, 429, or 503. Every failure looked identical, so every failure got the same generic handling.</Paragraph>
+        <Paragraph>Architect voice flows now surface the HTTP response status code and error reason from data actions and secure data actions. That turns one undifferentiated failure path into something you can actually branch on, because those status codes mean genuinely different things operationally.</Paragraph>
+        <div className="my-4 p-4 rounded-lg" style={{ backgroundColor: C.bg2, border: `1px solid ${C.border}` }}>
+          {[
+            { indent: 0, text: 'CALL DATA ACTION -> FAILURE PATH', color: C.red },
+            { indent: 1, text: 'SWITCH on HTTP status code:', color: C.blue },
+            { indent: 2, text: '404 — record genuinely not found: treat as new customer, continue normally', color: C.green },
+            { indent: 2, text: '401 / 403 — credential expired or revoked: route to fallback queue, alert operations', color: C.orange },
+            { indent: 2, text: '429 — rate limited: skip enrichment this call, do not retry inside the flow', color: C.orange },
+            { indent: 2, text: '5xx — upstream outage: use default routing, flag the interaction for follow-up', color: C.red },
+            { indent: 1, text: 'Store status code and error reason in a flow variable for downstream diagnostics', color: C.purple },
+          ].map((line, i) => (
+            <div key={i} className="text-xs" style={{ paddingLeft: line.indent * 20, color: line.color, fontFamily: MONO, marginBottom: 2 }}>{line.text}</div>
+          ))}
+        </div>
+        <CalloutBox type="tip">The most valuable distinction this unlocks is 404 versus everything else. "This customer does not exist" is a normal business outcome that should route the call forward; "the API is down" is an incident that should not be silently absorbed into the new-customer path. Conflating the two is one of the most common causes of contact centers not noticing an integration outage for hours.</CalloutBox>
+        <CalloutBox type="warning">Error reasons can echo text straight from the upstream API, and some APIs put detail in error bodies that you would not want spoken to a caller or written into an interaction attribute. Use status codes for routing decisions and log the error reason for diagnostics — do not pass it into a TTS prompt.</CalloutBox>
         <SubHeading>Caching & Performance</SubHeading>
         <Paragraph>Genesys Cloud does not provide built-in data action response caching. If your flow calls the same data action repeatedly (e.g., looking up the same customer in CRM for screen pop AND routing decisions), call the action ONCE early in the flow and store results in flow variables. For high-volume lookups, consider adding a caching layer (Redis, ElastiCache) in front of your API to reduce latency and external system load.</Paragraph>
       </section>

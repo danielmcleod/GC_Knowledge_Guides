@@ -887,6 +887,11 @@ const Tier2Content = ({ sectionRefs }) => {
             </div>
           ))}
         </div>
+        <SubHeading>Screen Recording Playback Controls</SubHeading>
+        <Paragraph>Screen recording playback now supports adjustable playback speed, zooming into a specific area of the screen, and panning across it.</Paragraph>
+        <Paragraph>These sound like conveniences and are closer to prerequisites. A screen recording captures the agent's display at its native resolution, which then gets scaled into a review pane — and at that scale the fields that matter are frequently unreadable. An evaluator trying to confirm whether the agent selected the correct disposition code is looking at a few illegible pixels. Zoom and pan make the recording evidence rather than an impression.</Paragraph>
+        <Paragraph>Variable speed addresses the other half of the problem: most of a screen recording is uneventful. Being able to move quickly through navigation and slow down at the moments that matter is what makes reviewing full sessions practical instead of something evaluators quietly stop doing.</Paragraph>
+        <CalloutBox type="warning">Zoom cuts both ways for privacy. The same control that makes a disposition field legible also makes customer data on adjacent parts of the screen legible. Where screen recording captures applications holding payment or health data, confirm your masking configuration is doing the work — masking must happen at capture, because a reviewer with zoom can read anything the recording retained.</CalloutBox>
       </section>
 
       {/* T2S8 */}

@@ -151,7 +151,7 @@ const DIALING_MODES = [
     best: 'Notifications, reminders, surveys, voicemail drops',
     agents: '0', analogy: 'A robocall — but a legal, smart one',
     how: 'The system dials contacts with no agents involved at all. Live answers are routed to an automated IVR flow (Architect) that can play messages, collect input, or offer a transfer to a live agent.',
-    note: null,
+    note: 'No longer voice-only — agentless notifications can now also be sent asynchronously over web and mobile messaging channels, with no live agent interaction required.',
   },
   {
     name: 'External Calling', speed: 1, abandon: 'None',
@@ -677,6 +677,12 @@ const Tier1Content = ({ sectionRefs }) => {
             </ExpandableCard>
           ))}
         </div>
+        <SubHeading>Agentless Notifications Beyond Voice</SubHeading>
+        <Paragraph>Agentless dialing has always meant a phone call placed without an agent. That is no longer the only shape it takes: administrators can now send proactive, asynchronous notifications over web and mobile messaging channels, again with no live agent involved.</Paragraph>
+        <Paragraph>The word <em>asynchronous</em> is what makes this different in kind rather than degree. An agentless call has to find the customer at home, awake, and willing to pick up — miss that window and the attempt is simply wasted, which is why voice notification campaigns burn through retry logic. A message waits. The customer reads it when they next open their phone, and the notification is delivered whether or not they were available at the moment you sent it.</Paragraph>
+        <Paragraph>That changes which channel suits which message. An appointment reminder, a delivery update, or a balance alert is information the customer needs to <em>have</em>, not a conversation they need to be present for — those belong on messaging. Reserve agentless voice for the cases where reaching someone immediately genuinely matters, such as a fraud alert or a service outage affecting them right now.</Paragraph>
+        <CalloutBox type="info">A message notification can also become a conversation. Because it lands in a messaging channel, a customer who replies is in a live thread that can route to a queue like any other digital interaction — something an agentless voice notification cannot offer once the call ends.</CalloutBox>
+        <CalloutBox type="warning">Consent and opt-out obligations follow the channel, not the campaign type. Proactive messaging is subject to the same messaging consent rules and opt-out handling as any other outbound message, and the fact that no agent was involved does not exempt it. Confirm you hold messaging consent for each contact before sending — voice consent is not messaging consent.</CalloutBox>
       </section>
 
       {/* T1S4 */}
@@ -782,6 +788,13 @@ Jane,      Doe,      5552345678,  5558765432,  jane@x.com, 90210,   A-1002,    1
         <div className="p-4 rounded-lg text-sm" style={{ backgroundColor: C.bg2, color: C.t2, fontFamily: SANS, border: `1px solid ${C.border}`, lineHeight: 1.7 }}>{COLUMN_TABS[activeColTab].content}</div>
         <SubHeading>Contact List Filters</SubHeading>
         <Paragraph>Filters let you target a subset of your contact list without creating a new list. Up to 10 conditions per filter using AND/OR logic. Conditions compare column values (equals, not equals, contains, greater than, less than, between, is set, is not set). Only ONE filter can be active per campaign. Use case: "Only dial contacts where State = 'CA' AND Balance {'>'} 100."</Paragraph>
+        <SubHeading>Retention — Letting Contact Data Expire</SubHeading>
+        <Paragraph>Administrators can now configure retention periods for outbound contact lists and for individual contact records. When the period elapses, the data is removed rather than sitting in the platform indefinitely.</Paragraph>
+        <Paragraph>Contact lists are, quietly, one of the largest concentrations of personal data in a contact center. A list uploaded for a single collections campaign in 2023 contains names, phone numbers, account identifiers, and balances — and unless somebody deliberately deleted it, it is still there. Retention turns that from a manual cleanup task nobody owns into a property of the list itself.</Paragraph>
+        <Paragraph>The two levels serve different purposes. List-level retention suits campaign data with a natural end — a seasonal promotion list that has no reason to outlive the campaign. Record-level retention suits long-lived lists where individual contacts age out at different times, so the list persists while stale records do not.</Paragraph>
+        <CalloutBox type="warning">Retention deletes contact data permanently. Confirm what else depends on a list before setting a period on it — campaign rules that reference contact columns, exports feeding reporting, and any downstream analysis that assumes historical records are still queryable. Deletion is not reversible, and the failure mode is discovering the dependency after the data is gone.</CalloutBox>
+        <CalloutBox type="tip">Set retention when you create a list, not later. Once a list has been running for two years, choosing a period means someone has to determine which records are still needed — exactly the analysis that never gets done. Deciding the lifespan up front, while the purpose of the list is still fresh, is far easier than reconstructing it afterwards.</CalloutBox>
+        <CalloutBox type="info">Retention supports data minimization commitments under regimes like GDPR, where keeping personal data no longer than necessary is an obligation rather than a preference. It is a control you can point at during an audit, which "we delete old lists when we remember to" is not.</CalloutBox>
       </section>
 
       {/* T2S3 */}
@@ -803,6 +816,11 @@ Jane,      Doe,      5552345678,  5558765432,  jane@x.com, 90210,   A-1002,    1
         <Paragraph>Define per-timezone calling windows. Default: 8:00 AM – 9:00 PM in the contact's local time (with a buffer stopping at 8:59 PM). Supports any IANA timezone. Works with ATZM or manual timezone columns. Key rule: if a contact's timezone makes them uncallable right now, ALL their phone numbers are skipped until the window opens — even if other numbers are in callable timezones.</Paragraph>
         <SubHeading>Attempt Controls</SubHeading>
         <Paragraph>Limit how many times a contact or specific phone number is attempted. Configurable per campaign. Max 100 attempts with a reset period of 2–30 days. Example: "Try each phone number up to 3 times with 2 hours between attempts, and try the contact a maximum of 9 times total."</Paragraph>
+        <SubHeading>Smarter SMS Opt-Out Detection</SubHeading>
+        <Paragraph>Genesys Cloud now recognizes a broader range of opt-out phrases and variations rather than matching single keywords alone, using keyword logic plus phrase matching across multiple languages.</Paragraph>
+        <Paragraph>The old behavior created a real compliance exposure. A customer who replied "please stop texting me" had unmistakably withdrawn consent, but a matcher looking for the bare keyword STOP would not necessarily catch it — and the campaign kept sending. The customer believes they opted out; your system believes they never asked. Broader phrase matching narrows that gap considerably.</Paragraph>
+        <CalloutBox type="warning">Broader detection reduces missed opt-outs; it does not eliminate them, and it does not transfer legal responsibility. Continue reviewing inbound message content for opt-out language the matcher did not catch, particularly in campaigns where consent withdrawal carries statutory penalties. Automated detection is a safety net, not the whole compliance program.</CalloutBox>
+        <CalloutBox type="info">This capability is <strong>not available in the CAC1 and FedRAMP regions</strong>. Organizations in those regions keep the previous detection behavior, so if you operate across regions do not assume uniform handling — verify your opt-out process independently where the feature is unavailable.</CalloutBox>
       </section>
 
       {/* T2S4 */}
